@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "100056795184",
+    "project_id": "we-connect-database",
+    "storage_bucket": "we-connect-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100056795184:android:3782826ac4244cf42c05f5",
+        "android_client_info": {
+          "package_name": "com.example.weconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100056795184-nmj49f2s5mgs5mphf1c5ggsa1e8ecj74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQVEEOtFaFC8Cmf0wDsfEYbtQKT3OfJCo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100056795184-nmj49f2s5mgs5mphf1c5ggsa1e8ecj74.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
