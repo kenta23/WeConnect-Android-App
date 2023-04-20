@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WeConnect</string>
+    <string name="stay_connected_through_weconnect">stay connected through WeConnect</string>
+    <string name="logo">Logo</string>
+</resources>
