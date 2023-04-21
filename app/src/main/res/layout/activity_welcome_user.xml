@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomeUser"
+    android:background="@drawable/bgemojis"
+    >
+
+    <TextView
+        android:id="@+id/txtUserWelcome"
+        android:layout_width="177dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/logo"
+        android:layout_alignStart="@+id/logo"
+        android:layout_alignEnd="@+id/logo"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="-26dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="-47dp"
+        android:fontFamily="@font/roboto"
+        android:text="Welcome user"
+        android:textColor="@color/dark"
+        android:textSize="24sp"
+        android:textStyle="normal" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:srcCompat="@drawable/logo_weconnect" />
+
+    <Button
+        android:id="@+id/btnContinue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtUserWelcome"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto"
+        android:text="Continue" />
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnContinue"
+        android:layout_centerInParent="true"
+        android:backgroundTint="@color/design_default_color_error"
+        android:text="logout" />
+
+</RelativeLayout>
