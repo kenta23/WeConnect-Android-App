@@ -5,18 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.MediaSession2;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class WelcomeUser extends AppCompatActivity {
 
@@ -26,6 +31,7 @@ public class WelcomeUser extends AppCompatActivity {
     private Button continuebtn;
     private Button logout;
 
+
     @SuppressLint("MissingInflatedId")
     @Override
 
@@ -33,6 +39,7 @@ public class WelcomeUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_user);
 
+        FirebaseApp.initializeApp(this);
 
         welcomeText = findViewById(R.id.txtUserWelcome);
         continuebtn = findViewById(R.id.btnContinue);
@@ -43,12 +50,11 @@ public class WelcomeUser extends AppCompatActivity {
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
 
+
         if(acct != null) {
             String username = acct.getDisplayName();
             welcomeText.setText("Welcome "+username);
         }
-
-
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +62,8 @@ public class WelcomeUser extends AppCompatActivity {
                signOut();
             }
         });
+
+
 
 
     }
@@ -71,4 +79,6 @@ public class WelcomeUser extends AppCompatActivity {
             }
         });
     }
+
+
 }

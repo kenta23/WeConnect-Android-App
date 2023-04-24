@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -22,6 +23,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 public class LoginOrRegister extends AppCompatActivity {
 
       private EditText email;
@@ -29,6 +33,8 @@ public class LoginOrRegister extends AppCompatActivity {
       private Button login;
       private FirebaseAuth auth;
       private ImageView googleButton;
+      private ImageView facebookButton;
+      private TextView register;
 
       //For google Authentication
       GoogleSignInOptions gso;
@@ -46,6 +52,8 @@ public class LoginOrRegister extends AppCompatActivity {
         password = findViewById(R.id.editPassword);
         login = findViewById(R.id.login);
         googleButton = findViewById(R.id.imgGoogle);
+        facebookButton = findViewById(R.id.imgFacebook);
+        register = findViewById(R.id.txtRegister);
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +103,23 @@ public class LoginOrRegister extends AppCompatActivity {
             }
         });
 
+        //FACEBOOK AUTHENTICATION
+        facebookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginOrRegister.this, FacebookAuth.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
+        });
+        //REGISTER ACCOUNT
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginOrRegister.this, Register.class));
+                finish();
+            }
+        });
 
     }
     public void signGoogleAccount() {
