@@ -12,7 +12,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         System.out.println("Hello World");
+        System.out.printf("Goodbye World");
 
     }
 }
