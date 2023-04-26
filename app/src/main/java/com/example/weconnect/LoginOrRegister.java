@@ -56,6 +56,7 @@ public class LoginOrRegister extends AppCompatActivity {
         register = findViewById(R.id.txtRegister);
 
 
+        // Login Button
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,6 +144,9 @@ public class LoginOrRegister extends AppCompatActivity {
             }
         }
     }
+
+
+
 
     private void nextActivity() {
         finish();
