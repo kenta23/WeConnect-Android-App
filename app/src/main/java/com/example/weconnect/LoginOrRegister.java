@@ -60,6 +60,7 @@ public class LoginOrRegister extends AppCompatActivity {
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
+        // Login Button
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,6 +160,9 @@ public class LoginOrRegister extends AppCompatActivity {
             }
         }
     }
+
+
+
 
     private void nextActivity() {
         finish();

@@ -23,4 +23,22 @@
     <string name="facebook_app_id">140712655507606</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">62ded2df12415d15398d7cf856946b60</string>
+
+    <string name="hintFirstName">First Name</string>
+    <string name="hintLastName">Last Name</string>
+    <string name="hintEmail">Email</string>
+    <string name="hintBirthday">Birthday</string>
+
+
+    <string name="textViewFive">Create an account by filling the info below</string>
+    <string name="textViewThree">Create Account</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="others">Others</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="by_checking_this_you_agree_to_our_terms_privacy_policy_and_cookies_policy_you_may_receive_sms_notifications_from_us_and_can_opt_out_any_time">By checking this, you agree to our Terms, Privacy Policy and Cookies Policy. You may receive SMS Notifications from us and can opt out any time.</string>
+    <string name="sign_up">Sign up</string>
+
+
 </resources>

@@ -53,7 +53,7 @@ public class WelcomeUser extends AppCompatActivity {
 
         if(acct != null) {
             String username = acct.getDisplayName();
-            welcomeText.setText("Welcome "+username);
+            welcomeText.setText("Welcome "+ username);
         }
         else {
             // Retrieve the display name from the Intent extra
