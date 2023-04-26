@@ -104,7 +104,7 @@ public class Register extends AppCompatActivity {
                     Toast.makeText( Register.this, "Please Enter your birthdate", Toast.LENGTH_LONG).show();
                     date.setError("birthdate is required");
                     date.requestFocus();
-                } else if ( radioGroupRegisterGender.getCheckedRadioButtonId() == 0-1){
+                } else if ( radioGroupRegisterGender.getCheckedRadioButtonId() == -1){
                     Toast.makeText(Register.this, "Please select your gender", Toast.LENGTH_LONG).show();
                     radioButtonRegisteredGenderSelected.setError("Gender is required");
                     radioButtonRegisteredGenderSelected.requestFocus();
