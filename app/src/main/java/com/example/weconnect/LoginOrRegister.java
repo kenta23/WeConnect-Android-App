@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.auth.OAuthProvider;
 
 public class LoginOrRegister extends AppCompatActivity {
 
@@ -34,6 +35,7 @@ public class LoginOrRegister extends AppCompatActivity {
       private FirebaseAuth auth;
       private ImageView googleButton;
       private ImageView facebookButton;
+      private ImageView githubButton;
       private TextView register;
 
       //For google Authentication
@@ -54,7 +56,9 @@ public class LoginOrRegister extends AppCompatActivity {
         googleButton = findViewById(R.id.imgGoogle);
         facebookButton = findViewById(R.id.imgFacebook);
         register = findViewById(R.id.txtRegister);
+        githubButton = findViewById(R.id.imgGithub);
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +116,18 @@ public class LoginOrRegister extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //GITHUB AUTHENTICATION
+        githubButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginOrRegister.this, githubAuth.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+
+            }
+
+
+        });
+
         //REGISTER ACCOUNT
         register.setOnClickListener(new View.OnClickListener() {
             @Override

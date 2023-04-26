@@ -55,6 +55,12 @@ public class WelcomeUser extends AppCompatActivity {
             String username = acct.getDisplayName();
             welcomeText.setText("Welcome "+username);
         }
+        else {
+            // Retrieve the display name from the Intent extra
+            String displayName = getIntent().getStringExtra("displayName");
+            // Set the welcome message with the user's display name
+            welcomeText.setText(getString(R.string.welcome_message, displayName));
+        }
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +68,7 @@ public class WelcomeUser extends AppCompatActivity {
                signOut();
             }
         });
+
 
 
 

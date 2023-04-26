@@ -5,45 +5,42 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Arrays;
 
-public class FacebookAuth extends LoginOrRegister {
+public class facebook_auth extends LoginOrRegister {
 
-    CallbackManager callbackManager;
+    private CallbackManager mCallbackManager;
     private FirebaseAuth mAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        callbackManager = CallbackManager.Factory.create();
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
+        // Initialize Facebook Login button
+        mCallbackManager = CallbackManager.Factory.create();
 
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
-
-        LoginManager.getInstance().registerCallback(callbackManager,
+        LoginManager.getInstance().registerCallback(mCallbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
@@ -61,21 +58,9 @@ public class FacebookAuth extends LoginOrRegister {
                     }
                 });
 
-
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Pass the activity result back to the Facebook SDK
-        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
-        
-
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -84,40 +69,23 @@ public class FacebookAuth extends LoginOrRegister {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            Intent intent = new Intent(facebook_auth.this, WelcomeUser.class);
+                            intent.putExtra("displayName", user.getDisplayName());
+                            startActivity(intent);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(FacebookAuth.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(facebook_auth.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
-
-    private void updateUI(FirebaseUser user) {
-        final String[] name = {""};
-        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                try {
-                    name[0] = object.getString("name");
-                    // Store the name in a shared preference or pass it to the next activity
-                    // or do whatever you want with the name here
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "name");
-        request.setParameters(parameters);
-        request.executeAsync();
-
-        Intent intent = new Intent(FacebookAuth.this, WelcomeUser.class);
-
-        intent.putExtra("name", name[0]);
-        startActivity(intent);
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Pass the activity result back to the Facebook SDK
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }

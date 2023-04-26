@@ -18,6 +18,7 @@
     <string name="log_in">Log in</string>
     <string name="email">Email</string>
 
+    <string name="welcome_message">Welcome, %s!</string>
 
     <string name="facebook_app_id">140712655507606</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
