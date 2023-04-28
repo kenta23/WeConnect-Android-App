@@ -8,6 +8,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -38,6 +39,7 @@ public class Register extends AppCompatActivity {
     private Button signup;
 
     private FirebaseAuth auth;
+    private CheckBox checkBox;
     private static final String TAG = "Register";
 
 
@@ -63,6 +65,10 @@ public class Register extends AppCompatActivity {
         //RadioButton for Gender
         radioGroupRegisterGender = findViewById(R.id.radioGroup);
         radioGroupRegisterGender.clearCheck();
+
+        //Checkbox
+
+        checkBox = findViewById(R.id.chkAgreement);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +122,7 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(Register.this, "Password should be 8 characters long", Toast.LENGTH_LONG).show();
                 }else if(TextUtils.isEmpty(textConfirmPassword)){
                     Toast.makeText(Register.this, "Please confirm your password", Toast.LENGTH_LONG).show();
-                    confirmPass.setError("password is required");
+                    confirmPass.setError("Password is required");
                     confirmPass.requestFocus();
                 }else if (!textPassword.equals(textConfirmPassword)){
                     Toast.makeText(Register.this, "Password doesn't match", Toast.LENGTH_LONG).show();
@@ -124,6 +130,10 @@ public class Register extends AppCompatActivity {
                     //clear entered password
                     password.clearComposingText();
                     confirmPass.clearComposingText();
+                }else if (!checkBox.isChecked()){
+                    Toast.makeText(Register.this, "Please click the box if you wish to proceed", Toast.LENGTH_LONG).show();
+                    checkBox.setError("Checkbox is required to be able to proceed");
+                    checkBox.requestFocus();
                 }else{
 
                     textGender = radioButtonRegisteredGenderSelected.getText().toString();
