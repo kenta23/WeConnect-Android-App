@@ -23,6 +23,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
 
@@ -49,6 +54,7 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
 
         //editText
@@ -69,6 +75,8 @@ public class Register extends AppCompatActivity {
         //Checkbox
 
         checkBox = findViewById(R.id.chkAgreement);
+
+        auth = FirebaseAuth.getInstance();
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,10 +143,8 @@ public class Register extends AppCompatActivity {
                     checkBox.setError("Checkbox is required to be able to proceed");
                     checkBox.requestFocus();
                 }else{
-
                     textGender = radioButtonRegisteredGenderSelected.getText().toString();
-
-                    registerUser(textFirstName, textLastName, textEmail, textDate , textGender, textPassword);
+                    registerUser(textFirstName, textLastName, textEmail, textPassword, textDate ,textGender);
                 }
 
 
@@ -146,9 +152,8 @@ public class Register extends AppCompatActivity {
         });
     }
         //Register User
-    private void registerUser(String textFirstName, String textLastName, String textEmail, String textDate, String textGender, String textPassword) {
+    private void registerUser(String textFirstName, String textLastName, String textEmail,String textPassword,  String textDate, String textGender ) {
 
-        auth = FirebaseAuth.getInstance();
 
         auth.createUserWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -156,13 +161,23 @@ public class Register extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Toast.makeText(Register.this, "Account Registered", Toast.LENGTH_SHORT).show();
 
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("First name", textFirstName);
+                    map.put("Last name", textLastName);
+                    map.put("email", textEmail);
+                    map.put("password", textPassword);
+                    map.put("Birthday", textDate);
+                    map.put("Gender", textGender);
 
+                    FirebaseDatabase.getInstance().getReference().child("User").child("Accounts").updateChildren(map); //use in Hashmap
 
                     //Open WelcomeUser Activity
-                    startActivity(new Intent(Register.this, WelcomeUser.class));
-
+                    Intent intent = new Intent(Register.this, WelcomeUser.class);
+                    intent.putExtra("name", textEmail);
+                    startActivity(intent);
                     //Prevent user from returning back to Register Activity incase they click back button after Registration
                     finish();
+
                 }else{
                     Toast.makeText(Register.this, "Registration Failed", Toast.LENGTH_SHORT).show();
 
