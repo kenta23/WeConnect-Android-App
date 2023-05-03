@@ -57,7 +57,7 @@ public class WelcomeUser extends AppCompatActivity {
         }
         else {
             // Retrieve the display name from the Intent extra
-            String displayName = getIntent().getStringExtra("displayName");
+            String displayName = getIntent().getStringExtra("email");
             // Set the welcome message with the user's display name
             welcomeText.setText(getString(R.string.welcome_message, displayName));
         }

@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,8 +24,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -47,14 +53,13 @@ public class Register extends AppCompatActivity {
     private CheckBox checkBox;
     private static final String TAG = "Register";
 
-
+    DatabaseReference reference;
+    FirebaseDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
 
         //editText
@@ -90,7 +95,7 @@ public class Register extends AppCompatActivity {
                 String textFirstName = firstName.getText().toString();
                 String textLastName = lastName.getText().toString();
                 String textEmail = email.getText().toString();
-                String textDate = date.getText().toString();
+                String textBirthDate = date.getText().toString();
                 String textPassword = password.getText().toString();
                 String textConfirmPassword = confirmPass.getText().toString();
                 String textGender;
@@ -114,7 +119,7 @@ public class Register extends AppCompatActivity {
                     Toast.makeText( Register.this, "Please Enter re-enter email address", Toast.LENGTH_LONG).show();
                     email.setError("email is required");
                     email.requestFocus();
-                } else if(TextUtils.isEmpty(textDate)){
+                } else if(TextUtils.isEmpty(textBirthDate)){
                     Toast.makeText( Register.this, "Please Enter your birthdate", Toast.LENGTH_LONG).show();
                     date.setError("birthdate is required");
                     date.requestFocus();
@@ -143,37 +148,92 @@ public class Register extends AppCompatActivity {
                     checkBox.setError("Checkbox is required to be able to proceed");
                     checkBox.requestFocus();
                 }else{
-                    textGender = radioButtonRegisteredGenderSelected.getText().toString();
-                    registerUser(textFirstName, textLastName, textEmail, textPassword, textDate ,textGender);
-                }
+                  /*
+                    Users users = new Users(textFirstName, textLastName, textEmail, textDate, textGender, textPassword);
+                    db = FirebaseDatabase.getInstance();
+                    reference = db.getReference("Users");
+                    reference.child(textFirstName).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
 
+
+                            firstName.setText("");
+                            lastName.setText("");
+                            email.setText("");
+                            date.setText("");
+                            password.setText("");
+                            Toast.makeText(Register.this,"Successfully Added",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                   */
+                    textGender = radioButtonRegisteredGenderSelected.getText().toString();
+                    registerUser(textFirstName, textLastName, textEmail, textPassword, textBirthDate, textGender);
+                    Intent intent = new Intent(Register.this, WelcomeUser.class);
+                    intent.putExtra("user", textFirstName);
+                    startActivity(intent);
+                    finish();
+
+
+                   // reference = FirebaseDatabase.getInstance().getReference();
+
+                  /*  reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.child("Users").hasChild(textEmail)) {
+                                Toast.makeText(Register.this, "Email already exists", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                reference.child("Users").child(textFirstName).child("First name").setValue(textFirstName);
+                                reference.child("Users").child(textFirstName).child("Last name").setValue(textLastName);
+                                reference.child("Users").child(textFirstName).child("Email").setValue(textEmail);
+                                reference.child("Users").child(textFirstName).child("Birthdate").setValue(textBirthDate);
+                                reference.child("Users").child(textFirstName).child("Password").setValue(textPassword);
+
+                                Toast.makeText(Register.this, "Account Registered", Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(Register.this, WelcomeUser.class);
+                                intent.putExtra("name", textFirstName);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(Register.this, "Error", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                   */
+
+
+                }
 
             }
         });
     }
         //Register User
-    private void registerUser(String textFirstName, String textLastName, String textEmail,String textPassword,  String textDate, String textGender ) {
+    private void registerUser(String firstname, String lastname, String emailAdd, String password, String birthdate, String gender ) {
 
-
-        auth.createUserWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword(emailAdd, password).addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(Register.this, "Account Registered", Toast.LENGTH_SHORT).show();
 
                     HashMap<String, Object> map = new HashMap<>();
-                    map.put("First name", textFirstName);
-                    map.put("Last name", textLastName);
-                    map.put("email", textEmail);
-                    map.put("password", textPassword);
-                    map.put("Birthday", textDate);
-                    map.put("Gender", textGender);
+                    map.put("First name", firstname);
+                    map.put("Last name", lastname);
+                    map.put("email", emailAdd);
+                    map.put("password", password);
+                    map.put("Birthday", birthdate);
+                    map.put("Gender", gender);
 
-                    FirebaseDatabase.getInstance().getReference().child("User").child("Accounts").updateChildren(map); //use in Hashmap
+                    FirebaseDatabase.getInstance().getReference().child("User").child("Accounts").child(firstname).updateChildren(map); //use in Hashmap
 
                     //Open WelcomeUser Activity
                     Intent intent = new Intent(Register.this, WelcomeUser.class);
-                    intent.putExtra("name", textEmail);
+                    intent.putExtra("email", emailAdd);
                     startActivity(intent);
                     //Prevent user from returning back to Register Activity incase they click back button after Registration
                     finish();

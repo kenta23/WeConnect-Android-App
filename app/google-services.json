@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "100056795184",
+    "firebase_url": "https://we-connect-database-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "we-connect-database",
     "storage_bucket": "we-connect-database.appspot.com"
   },
@@ -14,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "100056795184-nmj49f2s5mgs5mphf1c5ggsa1e8ecj74.apps.googleusercontent.com",
+          "client_id": "100056795184-p8aik7lidc79icjrcshbutrtsf1kid5s.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

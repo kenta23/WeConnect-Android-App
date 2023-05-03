@@ -39,6 +39,15 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="by_checking_this_you_agree_to_our_terms_privacy_policy_and_cookies_policy_you_may_receive_sms_notifications_from_us_and_can_opt_out_any_time">By checking this, you agree to our Terms, Privacy Policy and Cookies Policy. You may receive SMS Notifications from us and can opt out any time.</string>
     <string name="sign_up">Sign up</string>
+    <string name="title_activity_chat">Chat</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 
 </resources>

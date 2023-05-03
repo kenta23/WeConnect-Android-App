@@ -84,7 +84,7 @@ public class LoginOrRegister extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         Toast.makeText(LoginOrRegister.this, "Logging in", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginOrRegister.this, MainActivity.class));
+                        startActivity(new Intent(LoginOrRegister.this, WelcomeUser.class));
                         finish();
                     }
                 });
