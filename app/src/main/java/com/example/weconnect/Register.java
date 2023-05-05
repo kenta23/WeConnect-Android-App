@@ -3,60 +3,209 @@ package com.example.weconnect;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
-import java.util.Objects;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
 
-    //TextInput
-    EditText firstName, lastName, emailAdd, birthDate, password, confirmPassword;
+    private EditText firstName;
+    private EditText lastName;
+    private EditText email;
+    private EditText date;
+    private EditText password;
+    private EditText confirmPass;
 
-    //RadioGroup
-    RadioGroup radioGroup;
+    private RadioGroup radioGroupRegisterGender;
 
-    //Button
-    Button btnSignup;
+    private RadioButton radioButtonRegisteredGenderSelected;
+    private Button signup;
 
-    FirebaseDatabase userDatabase;
+    private FirebaseAuth auth;
+    private CheckBox checkBox;
+    private static final String TAG = "Register";
+
     DatabaseReference reference;
-
+    FirebaseDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+
+        //editText
         firstName = findViewById(R.id.editFirstName);
         lastName = findViewById(R.id.editLastName);
-        emailAdd = findViewById(R.id.editTextTextEmailAddress);
-        birthDate = findViewById(R.id.editTextDate);
+        email = findViewById(R.id.editTextTextEmailAddress);
+        date = findViewById(R.id.editTextDate);
         password = findViewById(R.id.editPassword);
-        confirmPassword = findViewById(R.id.editConfirmPassword);
-        btnSignup = findViewById(R.id.btnSignup);
-        radioGroup = findViewById(R.id.radioGroup);
+        confirmPass = findViewById(R.id.editConfirmPassword);
 
-        //Saving Data in Firebase
+        //Button
+        signup = findViewById(R.id.btnSignup);
 
-        btnSignup.setOnClickListener(new View.OnClickListener() {
+        //RadioButton for Gender
+        radioGroupRegisterGender = findViewById(R.id.radioGroup);
+        radioGroupRegisterGender.clearCheck();
+
+        //Checkbox
+
+        checkBox = findViewById(R.id.chkAgreement);
+
+        auth = FirebaseAuth.getInstance();
+
+        signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                int selectedGenderId = radioGroupRegisterGender.getCheckedRadioButtonId();
+                radioButtonRegisteredGenderSelected = findViewById(selectedGenderId);
+
+                //obtain the entered data
+
+                String textFirstName = firstName.getText().toString();
+                String textLastName = lastName.getText().toString();
+                String textEmail = email.getText().toString();
+                String textBirthDate = date.getText().toString();
+                String textPassword = password.getText().toString();
+                String textConfirmPassword = confirmPass.getText().toString();
+                String textGender;
 
 
+                // If Field Data is Empty
+                if(TextUtils.isEmpty(textFirstName)){
+                    Toast.makeText( Register.this, "Please Enter your first name", Toast.LENGTH_LONG).show();
+                    firstName.setError("First name is required");
+                    firstName.requestFocus();
+                } else if (TextUtils.isEmpty(textLastName)){
+                    Toast.makeText( Register.this, "Please Enter your last name", Toast.LENGTH_LONG).show();
+                    lastName.setError("Last name is required");
+                    lastName.requestFocus();
+
+                } else if (TextUtils.isEmpty(textEmail)){
+                    Toast.makeText( Register.this, "Please Enter your email address", Toast.LENGTH_LONG).show();
+                    email.setError("email is required");
+                    email.requestFocus();
+                } else if(!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()){
+                    Toast.makeText( Register.this, "Please Enter re-enter email address", Toast.LENGTH_LONG).show();
+                    email.setError("email is required");
+                    email.requestFocus();
+                } else if(TextUtils.isEmpty(textBirthDate)){
+                    Toast.makeText( Register.this, "Please Enter your birthdate", Toast.LENGTH_LONG).show();
+                    date.setError("birthdate is required");
+                    date.requestFocus();
+                } else if ( radioGroupRegisterGender.getCheckedRadioButtonId() == -1){
+                    Toast.makeText(Register.this, "Please select your gender", Toast.LENGTH_LONG).show();
+                    radioButtonRegisteredGenderSelected.setError("Gender is required");
+                    radioButtonRegisteredGenderSelected.requestFocus();
+                }else if (TextUtils.isEmpty(textPassword)){
+                    Toast.makeText(Register.this, "Please enter your password", Toast.LENGTH_LONG).show();
+                    password.setError("password is required");
+                    password.requestFocus();
+                }else if(textPassword.length() < 8 ) {
+                    Toast.makeText(Register.this, "Password should be 8 characters long", Toast.LENGTH_LONG).show();
+                }else if(TextUtils.isEmpty(textConfirmPassword)){
+                    Toast.makeText(Register.this, "Please confirm your password", Toast.LENGTH_LONG).show();
+                    confirmPass.setError("Password is required");
+                    confirmPass.requestFocus();
+                }else if (!textPassword.equals(textConfirmPassword)){
+                    Toast.makeText(Register.this, "Password doesn't match", Toast.LENGTH_LONG).show();
+                    confirmPass.setError("Password confirmation required");
+                    //clear entered password
+                    password.clearComposingText();
+                    confirmPass.clearComposingText();
+                }else if (!checkBox.isChecked()){
+                    Toast.makeText(Register.this, "Please click the box if you wish to proceed", Toast.LENGTH_LONG).show();
+                    checkBox.setError("Checkbox is required to be able to proceed");
+                    checkBox.requestFocus();
+                }else{
+                    textGender = radioButtonRegisteredGenderSelected.getText().toString();
+                    Users users = new Users(textFirstName, textLastName, textEmail, textBirthDate, textGender, textPassword);
+
+                    db = FirebaseDatabase.getInstance();
+                    reference = db.getReference("Users");
+                    reference.child(textFirstName).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            auth.createUserWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(Register.this, "Account Registered", Toast.LENGTH_SHORT).show();
+
+
+                                    }else{
+                                        Toast.makeText(Register.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+
+
+                                        try{
+                                            throw task.getException();
+                                        }catch (FirebaseAuthInvalidCredentialsException e){
+                                            email.setError("Your email is invalid. use a valid email");
+                                            email.requestFocus();
+                                        }catch (FirebaseAuthUserCollisionException e){
+                                            email.setError("User is already registered with this email. Please use another email.");
+                                            email.requestFocus();
+                                        }catch(Exception e){
+                                            Log.e(TAG, e.getMessage());
+                                            Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                        }
+
+
+                                    }
+                                }
+                            });
+
+                            firstName.setText("");
+                            lastName.setText("");
+                            email.setText("");
+                            date.setText("");
+                            password.setText("");
+                            Toast.makeText(Register.this,"Successfully Added",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    Intent intent = new Intent(Register.this, WelcomeUser.class);
+                    intent.putExtra("name", textFirstName);
+                    startActivity(intent);
+                    //Prevent user from returning back to Register Activity incase they click back button after Registration
+                    finish();
+
+
+                }
 
             }
         });
-
-
     }
-}
 
+}
