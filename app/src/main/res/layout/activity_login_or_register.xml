@@ -215,7 +215,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/password"
         android:layout_width="237dp"
         android:layout_height="48dp"
         android:ems="10"

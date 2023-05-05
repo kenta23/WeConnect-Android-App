@@ -1,6 +1,5 @@
 package com.example.weconnect;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -22,10 +21,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.google.firebase.auth.OAuthProvider;
 
 public class LoginOrRegister extends AppCompatActivity {
 
@@ -51,7 +46,7 @@ public class LoginOrRegister extends AppCompatActivity {
         setContentView(R.layout.activity_login_or_register);
 
         email = findViewById(R.id.editEmail);
-        password = findViewById(R.id.editPassword);
+        password = findViewById(R.id.password);
         login = findViewById(R.id.login);
         googleButton = findViewById(R.id.imgGoogle);
         facebookButton = findViewById(R.id.imgFacebook);
