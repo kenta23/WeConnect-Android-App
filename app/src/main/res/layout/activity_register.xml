@@ -7,7 +7,7 @@
     tools:context=".Register">
 
     <EditText
-        android:id="@+id/editFirstName"
+        android:id="@+id/firstName"
         android:layout_width="312dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
@@ -17,7 +17,7 @@
         android:hint="@string/hintFirstName"
         android:inputType="textPersonName"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/editLastName"
+        app:layout_constraintBottom_toTopOf="@+id/lastName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.388"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
         tools:ignore="VisualLintBounds" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/emailAdd"
         android:layout_width="308dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
@@ -48,14 +48,14 @@
         android:hint="@string/hintEmail"
         android:inputType="textEmailAddress"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextDate"
-        app:layout_constraintEnd_toEndOf="@+id/editLastName"
+        app:layout_constraintBottom_toTopOf="@+id/birthDate"
+        app:layout_constraintEnd_toEndOf="@+id/lastName"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editLastName"
-        app:layout_constraintTop_toBottomOf="@+id/editLastName" />
+        app:layout_constraintStart_toStartOf="@+id/lastName"
+        app:layout_constraintTop_toBottomOf="@+id/lastName" />
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/password"
         android:layout_width="306dp"
         android:layout_height="48dp"
         android:autofillHints=""
@@ -63,14 +63,14 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/editConfirmPassword"
+        app:layout_constraintBottom_toTopOf="@+id/confirmPassword"
         app:layout_constraintEnd_toEndOf="@+id/radioGroup"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <EditText
-        android:id="@+id/editTextDate"
+        android:id="@+id/birthDate"
         android:layout_width="306dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
@@ -81,10 +81,10 @@
         android:inputType="date"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/emailAdd"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintStart_toStartOf="@+id/emailAdd"
+        app:layout_constraintTop_toBottomOf="@+id/emailAdd" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -92,10 +92,10 @@
         android:layout_height="60dp"
         android:layout_marginTop="12dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/editTextDate"
+        app:layout_constraintEnd_toEndOf="@+id/birthDate"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextDate"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate">
+        app:layout_constraintStart_toStartOf="@+id/birthDate"
+        app:layout_constraintTop_toBottomOf="@+id/birthDate">
 
         <RadioButton
             android:id="@+id/rdbMale"
@@ -119,7 +119,7 @@
     </RadioGroup>
 
     <EditText
-        android:id="@+id/editLastName"
+        android:id="@+id/lastName"
         android:layout_width="308dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
@@ -129,11 +129,11 @@
         android:hint="@string/hintLastName"
         android:inputType="textPersonName"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/editFirstName"
+        app:layout_constraintBottom_toTopOf="@+id/emailAdd"
+        app:layout_constraintEnd_toEndOf="@+id/firstName"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/editFirstName" />
+        app:layout_constraintStart_toStartOf="@+id/firstName"
+        app:layout_constraintTop_toBottomOf="@+id/firstName" />
 
     <TextView
         android:id="@+id/textView7"
@@ -143,11 +143,11 @@
         android:layout_marginBottom="35dp"
         android:text="@string/gender"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/editPassword"
+        app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintEnd_toStartOf="@+id/radioGroup"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextDate"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate"
+        app:layout_constraintStart_toStartOf="@+id/birthDate"
+        app:layout_constraintTop_toBottomOf="@+id/birthDate"
         app:layout_constraintVertical_bias="0.0" />
 
     <CheckBox
@@ -157,14 +157,14 @@
         android:text="@string/by_checking_this_you_agree_to_our_terms_privacy_policy_and_cookies_policy_you_may_receive_sms_notifications_from_us_and_can_opt_out_any_time"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/btnSignup"
-        app:layout_constraintEnd_toEndOf="@+id/editConfirmPassword"
+        app:layout_constraintEnd_toEndOf="@+id/confirmPassword"
         app:layout_constraintHorizontal_bias="0.285"
-        app:layout_constraintStart_toStartOf="@+id/editConfirmPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editConfirmPassword"
+        app:layout_constraintStart_toStartOf="@+id/confirmPassword"
+        app:layout_constraintTop_toBottomOf="@+id/confirmPassword"
         tools:ignore="TextSizeCheck" />
 
     <EditText
-        android:id="@+id/editConfirmPassword"
+        android:id="@+id/confirmPassword"
         android:layout_width="306dp"
         android:layout_height="48dp"
         android:autofillHints=""
@@ -173,16 +173,16 @@
         android:inputType="textPassword"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/chkAgreement"
-        app:layout_constraintEnd_toEndOf="@+id/editPassword"
+        app:layout_constraintEnd_toEndOf="@+id/password"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+        app:layout_constraintStart_toStartOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <view
         android:id="@+id/view2"
         class="com.google.android.material.imageview.ShapeableImageView"
-        android:layout_width="match_parent"
-        android:layout_height="218dp"
+        android:layout_width="405dp"
+        android:layout_height="179dp"
         android:background="@drawable/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
