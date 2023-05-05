@@ -35,12 +35,12 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        firstName = findViewById(R.id.firstName);
-        lastName = findViewById(R.id.lastName);
-        emailAdd = findViewById(R.id.emailAdd);
-        birthDate = findViewById(R.id.birthDate);
-        password = findViewById(R.id.password);
-        confirmPassword = findViewById(R.id.confirmPassword);
+        firstName = findViewById(R.id.editFirstName);
+        lastName = findViewById(R.id.editLastName);
+        emailAdd = findViewById(R.id.editTextTextEmailAddress);
+        birthDate = findViewById(R.id.editTextDate);
+        password = findViewById(R.id.editPassword);
+        confirmPassword = findViewById(R.id.editConfirmPassword);
         btnSignup = findViewById(R.id.btnSignup);
         radioGroup = findViewById(R.id.radioGroup);
 
