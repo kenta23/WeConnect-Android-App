@@ -1,10 +1,14 @@
 package com.example.weconnect;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,10 +21,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginOrRegister extends AppCompatActivity {
 
@@ -53,7 +59,8 @@ public class LoginOrRegister extends AppCompatActivity {
         register = findViewById(R.id.txtRegister);
         githubButton = findViewById(R.id.imgGithub);
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
+      //  FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         // Login Button
         login.setOnClickListener(new View.OnClickListener() {
@@ -69,9 +76,46 @@ public class LoginOrRegister extends AppCompatActivity {
                     Toast.makeText(LoginOrRegister.this, "Password is too short!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    loginUser(emailString, passwordString);
+                   // loginUser(emailString, passwordString);
+                    auth.signInWithEmailAndPassword(emailString, passwordString).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            Toast.makeText(LoginOrRegister.this, "Logging in", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(LoginOrRegister.this, WelcomeUser.class);
+                            intent.putExtra("email", emailString);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+
+                    //userlogin(emailString, passwordString);
+                   // loginUser(emailString, passwordString);
                 }
             }
+
+         /*   private void userlogin(String email, String password) {
+                auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithEmail:success");
+                                    FirebaseUser user = auth.getCurrentUser();
+
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                    Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        });
+            } */
+
+
 
             private void loginUser(String email, String password) {
 
@@ -79,7 +123,9 @@ public class LoginOrRegister extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         Toast.makeText(LoginOrRegister.this, "Logging in", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginOrRegister.this, WelcomeUser.class));
+
+                        Intent intent = new Intent(LoginOrRegister.this, WelcomeUser.class);
+                        intent.putExtra("email", email);
                         finish();
                     }
                 });
@@ -129,7 +175,7 @@ public class LoginOrRegister extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginOrRegister.this, Register.class));
-                finish();
+
             }
         });
 

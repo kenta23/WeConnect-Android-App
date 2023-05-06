@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaSession2;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class WelcomeUser extends AppCompatActivity {
 
@@ -56,10 +58,11 @@ public class WelcomeUser extends AppCompatActivity {
             welcomeText.setText("Welcome "+ username);
         }
         else {
-            // Retrieve the display name from the Intent extra
-            String displayName = getIntent().getStringExtra("email");
-            // Set the welcome message with the user's display name
-            welcomeText.setText(getString(R.string.welcome_message, displayName));
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user != null) {
+                String name = user.getDisplayName();
+                welcomeText.setText("Welcome "+name);
+            }
         }
 
         logout.setOnClickListener(new View.OnClickListener() {
