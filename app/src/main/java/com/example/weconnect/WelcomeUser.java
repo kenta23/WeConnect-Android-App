@@ -75,6 +75,8 @@ public class WelcomeUser extends AppCompatActivity {
                 String username = googleAccount.getDisplayName();
                 welcomeText.setText("Welcome, " + username + "!");
             }
+
+            //follows here
         }
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +88,14 @@ public class WelcomeUser extends AppCompatActivity {
 
 
 
-
+        continuebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(WelcomeUser.this, Chat.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
     public void signOut() {
