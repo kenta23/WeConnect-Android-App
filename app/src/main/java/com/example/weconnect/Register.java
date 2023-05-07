@@ -159,7 +159,7 @@ public class Register extends AppCompatActivity {
                     checkBox.requestFocus();
                 }else{
                     textGender = radioButtonRegisteredGenderSelected.getText().toString();
-                    Users users = new Users(textFirstName, textLastName, textEmail, textBirthDate, textGender, textPassword);
+                    Users users = new Users(textFirstName, textLastName, textEmail, textBirthDate, textGender, textPassword); //put all the values needed
 
                     db = FirebaseDatabase.getInstance();
                     reference = db.getReference("Users");

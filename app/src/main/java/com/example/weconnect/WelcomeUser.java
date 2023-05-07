@@ -1,9 +1,11 @@
 package com.example.weconnect;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaSession2;
 import android.net.Uri;
@@ -24,6 +26,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.ktx.Firebase;
 
 public class WelcomeUser extends AppCompatActivity {
 
@@ -33,6 +36,9 @@ public class WelcomeUser extends AppCompatActivity {
     private Button continuebtn;
     private Button logout;
 
+    FirebaseUser user;
+    GoogleSignInAccount googleAccount;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,7 +47,13 @@ public class WelcomeUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_user);
 
+         googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+         user = FirebaseAuth.getInstance().getCurrentUser();
+
+
         FirebaseApp.initializeApp(this);
+        //firebase auth instance
+
 
         welcomeText = findViewById(R.id.txtUserWelcome);
         continuebtn = findViewById(R.id.btnContinue);
@@ -50,18 +62,18 @@ public class WelcomeUser extends AppCompatActivity {
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
 
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+      //  GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+      //  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-
-        if(acct != null) {
-            String username = acct.getDisplayName();
-            welcomeText.setText("Welcome "+ username);
+        if(user != null) {
+            String name = user.getDisplayName();
+            welcomeText.setText("Welcome, " + name + "!");
         }
         else {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if (user != null) {
-                String name = user.getDisplayName();
-                welcomeText.setText("Welcome "+name);
+            if(googleAccount != null)
+            {
+                String username = googleAccount.getDisplayName();
+                welcomeText.setText("Welcome, " + username + "!");
             }
         }
 
@@ -78,8 +90,36 @@ public class WelcomeUser extends AppCompatActivity {
 
     }
     public void signOut() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeUser.this);
+        builder.setMessage("Are you sure you want to Log out?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked Yes button
+                        // Add your logic here
+                        signOutGoogle();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked No button
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+
+
+
+    }
+
+    private void signOutGoogle() {
+
         //Sign out
         GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
         mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

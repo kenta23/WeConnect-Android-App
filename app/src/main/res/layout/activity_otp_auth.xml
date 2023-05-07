@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="50dp"
+    tools:context=".OtpAuth">
+
+
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+
+            android:src="@drawable/logo_weconnect" />
+
+        <TextView
+            android:id="@+id/textheading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:layout_marginTop="40dp"
+            android:text="Enter the code you received"
+            android:textAlignment="center"
+            android:textColor="@color/dark"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/textCode"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
+            android:layout_below="@id/textheading"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:hint="Verification Code"
+            android:inputType="number"
+            android:textAlignment="center" />
+
+    <Button
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/textCode"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_radius"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="Verify OTP"
+        android:id="@+id/verifyButton"/>
+
+        <TextView
+            android:id="@+id/otherOption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/verifyButton"
+            android:layout_marginTop="25dp"
+            android:text="Didn't received? Change your number"
+            android:textAlignment="center"
+            android:textColor="@color/dark"
+            android:textSize="16sp"
+
+            />
+
+
+
+
+</RelativeLayout>

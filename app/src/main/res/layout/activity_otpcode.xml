@@ -63,4 +63,28 @@
         android:layout_below="@id/countryPicker"
         />
 
+    <android.widget.Button
+        android:id="@+id/sentOTP"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_below="@+id/getphone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_radius"
+        android:backgroundTint="@color/primary"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="Sent OTP"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sentOTP"
+        android:layout_marginTop="30dp"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true"
+        />
+
 </RelativeLayout>

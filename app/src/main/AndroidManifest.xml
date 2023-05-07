@@ -16,6 +16,12 @@
         android:theme="@style/Theme.WeConnect"
         tools:targetApi="31">
         <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".OtpAuth"
+            android:exported="false" />
+        <activity
             android:name=".Otpcode"
             android:exported="false" />
         <activity
