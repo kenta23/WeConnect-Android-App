@@ -73,7 +73,8 @@
       android:layout_centerHorizontal="true"
 
      >
-        <ImageView
+
+      <ImageView
             android:id="@+id/imageviewSort"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -81,14 +82,16 @@
 
         </ImageView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sort"
-            android:textSize="20sp"
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Sort"
+          android:textSize="20sp"
 
-            />
-     </LinearLayout>
+          />
+
+  </LinearLayout>
+
     </RelativeLayout>
 
     <androidx.appcompat.widget.Toolbar

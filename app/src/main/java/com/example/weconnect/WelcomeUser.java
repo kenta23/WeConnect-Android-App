@@ -26,6 +26,11 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.ktx.Firebase;
 
 public class WelcomeUser extends AppCompatActivity {
@@ -37,6 +42,7 @@ public class WelcomeUser extends AppCompatActivity {
     private Button logout;
 
     FirebaseUser user;
+    FirebaseAuth authProfile;
     GoogleSignInAccount googleAccount;
 
 
@@ -47,8 +53,8 @@ public class WelcomeUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_user);
 
-         googleAccount = GoogleSignIn.getLastSignedInAccount(this);
-         user = FirebaseAuth.getInstance().getCurrentUser();
+        googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
 
         FirebaseApp.initializeApp(this);
@@ -62,16 +68,14 @@ public class WelcomeUser extends AppCompatActivity {
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
 
-      //  GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-      //  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //  GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        //  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user != null) {
+        if (user != null) {
             String name = user.getDisplayName();
             welcomeText.setText("Welcome, " + name + "!");
-        }
-        else {
-            if(googleAccount != null)
-            {
+        } else {
+            if (googleAccount != null) {
                 String username = googleAccount.getDisplayName();
                 welcomeText.setText("Welcome, " + username + "!");
             }
@@ -79,13 +83,13 @@ public class WelcomeUser extends AppCompatActivity {
             //follows here
         }
 
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               signOut();
+                signOut();
             }
         });
-
 
 
         continuebtn.setOnClickListener(new View.OnClickListener() {
@@ -96,8 +100,9 @@ public class WelcomeUser extends AppCompatActivity {
                 finish();
             }
         });
-
     }
+
+
     public void signOut() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeUser.this);
@@ -120,15 +125,12 @@ public class WelcomeUser extends AppCompatActivity {
         alert.show();
 
 
-
-
     }
 
     private void signOutGoogle() {
 
         //Sign out
         GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
         mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -137,7 +139,9 @@ public class WelcomeUser extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
-
-
 }
+
+

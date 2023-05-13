@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">WeConnect</string>
-    <string name="stay_connected_through_weconnect">stay connected through WeConnect</string>
+    <string name="stay_connected_through_weconnect">Stay Connected Through WeConnect</string>
     <string name="logo">Logo</string>
     <string name="login_using_twitter">Login using Twitter</string>
     <string name="register_now">Don\'t have an account? Register</string>
@@ -48,6 +48,13 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+    <!-- Password Reset -->
+
+    <string name="view1">Enter your registered email to receive password reset.</string>
+    <string name="hint1">Enter email here</string>
+    <string name="reset">Reset Password</string>
 
 
 </resources>
