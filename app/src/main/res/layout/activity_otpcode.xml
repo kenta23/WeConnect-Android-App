@@ -24,7 +24,7 @@
         android:textAlignment="center"
         android:textColor="@color/dark"
         android:layout_below="@+id/logo"
-        android:id="@+id/textheading"
+        android:id="@+id/textheadingOtpCode"
         />
 
 

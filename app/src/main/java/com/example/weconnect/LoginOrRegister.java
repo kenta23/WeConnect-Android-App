@@ -72,6 +72,7 @@ public class LoginOrRegister extends AppCompatActivity {
         facebookButton = findViewById(R.id.imgFacebook);
         register = findViewById(R.id.txtRegister);
         phoneOtp = findViewById(R.id.imgPhone);
+        forgotPass = findViewById(R.id.txtForgotPassword);
 
 
         authProfile = FirebaseAuth.getInstance();
@@ -83,7 +84,7 @@ public class LoginOrRegister extends AppCompatActivity {
                 startActivity(new Intent(LoginOrRegister.this, ForgotPassword.class));
             }
         });
-        forgotPass = findViewById(R.id.txtForgotPassword);
+
    
            // Login Button
         login.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +174,8 @@ public class LoginOrRegister extends AppCompatActivity {
         phoneOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginOrRegister.this, githubAuth.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                Intent intent = new Intent(LoginOrRegister.this, Otpcode.class);
+                startActivity(intent);
 
             }
 
@@ -184,7 +186,9 @@ public class LoginOrRegister extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginOrRegister.this, Register.class));
+               Intent intent = new Intent(LoginOrRegister.this, Register.class);
+               startActivity(intent);
+
 
             }
         });

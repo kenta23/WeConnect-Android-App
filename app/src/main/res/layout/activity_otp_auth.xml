@@ -52,19 +52,28 @@
         android:text="Verify OTP"
         android:id="@+id/verifyButton"/>
 
-        <TextView
-            android:id="@+id/changePhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/verifyButton"
-            android:layout_marginTop="25dp"
-            android:text="Didn't received? Change your number"
-            android:textAlignment="center"
-            android:textColor="@color/dark"
-            android:textSize="16sp"
+    <TextView
+        android:id="@+id/changePhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/verifyButton"
+        android:layout_marginTop="34dp"
+        android:text="Didn't received? Change your number"
+        android:textAlignment="center"
+        android:textColor="@color/dark"
+        android:textSize="16sp"
 
-            />
+        />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/changePhone"
+        android:layout_marginTop="30dp"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/progressLoadingAuth"
+        />
 
 
 

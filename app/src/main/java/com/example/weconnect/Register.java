@@ -90,7 +90,6 @@ public class Register extends AppCompatActivity {
         //Checkbox
 
         checkBox = findViewById(R.id.chkAgreement);
-
         auth = FirebaseAuth.getInstance();
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -167,55 +166,50 @@ public class Register extends AppCompatActivity {
 
     private void registerUser(String textFirstName, String textLastName, String textEmail, String textBirthDate, String textGender, String textPassword) {
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
 
         //Create User Profile
-        auth.createUserWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
+        auth.createUserWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(Register.this, task -> {
+            if(task.isSuccessful()) {
+                FirebaseUser firebaseUser = auth.getCurrentUser();
 
-                    FirebaseUser firebaseUser = auth.getCurrentUser();
+                //Enter Data into Firebase
+                Users users = new Users(textFirstName , textLastName , textEmail , textBirthDate, textGender , textPassword);
 
-                    //Enter Data into Firebase
-                    Users users = new Users(textFirstName , textLastName , textEmail , textBirthDate, textGender , textPassword);
+                //Extracting User for "Registered User" from Database
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+                reference.child(firebaseUser.getUid()).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(Register.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                            //Send Verification Email
+                            // firebaseUser.sendEmailVerification();
 
-                    //Extracting User for "Registered User" from Database
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(textFirstName);
-                    reference.child(firebaseUser.getUid()).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(Register.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                //Send Verification Email
-                                // firebaseUser.sendEmailVerification();
+                            //Open Login Page if Successful
+                            Intent intent = new Intent(Register.this, LoginOrRegister.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                                //Open Login Page if Successful
-                                Intent intent = new Intent(Register.this, LoginOrRegister.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                                startActivity(intent);
-                                finish();
-                            }else{
-                                Toast.makeText(Register.this, "Registration Failed", Toast.LENGTH_LONG).show();
-                            }
-
+                            startActivity(intent);
+                            finish();
+                        }else{
+                            Toast.makeText(Register.this, "Registration Failed", Toast.LENGTH_LONG).show();
                         }
-                    });
 
-                }else{
-                    try {
-                        throw task.getException();
-                    } catch(FirebaseAuthInvalidCredentialsException e){
-                        email.setError("Your Email is invalid or already in-use. Please use another email");
-                        email.requestFocus();
-                    } catch (FirebaseAuthUserCollisionException e ){
-                        email.setError("User is already registered with this email.");
-                        email.requestFocus();
-                    } catch(Exception e){
-                        Log.e(TAG , e.getMessage());
-                        Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_LONG );
                     }
+                });
+
+            }else{
+                try {
+                    throw task.getException();
+                } catch(FirebaseAuthInvalidCredentialsException e){
+                    email.setError("Your Email is invalid or already in-use. Please use another email");
+                    email.requestFocus();
+                } catch (FirebaseAuthUserCollisionException e ){
+                    email.setError("User is already registered with this email.");
+                    email.requestFocus();
+                } catch(Exception e){
+                    Log.e(TAG , e.getMessage());
+                    Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_LONG );
                 }
             }
         });

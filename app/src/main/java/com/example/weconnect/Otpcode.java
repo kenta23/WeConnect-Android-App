@@ -63,10 +63,10 @@ public class Otpcode extends AppCompatActivity {
 
                number = getPhonenumber.getText().toString();
                if(number.isEmpty()) {
-                   Toast.makeText(Otpcode.this, "Please enter your number!", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Please enter your number!", Toast.LENGTH_SHORT).show();
                }
                else if (number.length()>10) {
-                   Toast.makeText(Otpcode.this, "Invalid number", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Invalid number", Toast.LENGTH_SHORT).show();
                }
                else {
                    progressBar.setVisibility(view.VISIBLE);
@@ -103,7 +103,7 @@ public class Otpcode extends AppCompatActivity {
                     // Invalid request
                 } else if (e instanceof FirebaseTooManyRequestsException) {
                     // The SMS quota for the project has been exceeded
-                    Toast.makeText(Otpcode.this, "Too many SMS requests", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Too many SMS requests", Toast.LENGTH_SHORT).show();
                 } else if (e instanceof FirebaseAuthMissingActivityForRecaptchaException) {
                     // reCAPTCHA verification attempted with null Activity
                 }
@@ -118,7 +118,7 @@ public class Otpcode extends AppCompatActivity {
                 // now need to ask the user to enter the code and then construct a credential
                 // by combining the code with a verification ID.
                 super.onCodeSent(verificationId, token);
-                Toast.makeText(Otpcode.this, "OTP is sent", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "OTP is sent", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.INVISIBLE);
                 codeSent=verificationId;
 
@@ -129,13 +129,13 @@ public class Otpcode extends AppCompatActivity {
         };
     }
 
-    @Override
-    protected void onStart() {
+   // @Override
+    /*protected void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
-            Intent intent = new Intent(Otpcode.this, Chat.class);
+            Intent intent = new Intent(Otpcode.this, LoginOrRegister.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
-    }
+    } */
 }
