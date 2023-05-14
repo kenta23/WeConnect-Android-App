@@ -36,17 +36,16 @@
         />
 
     <com.hbb20.CountryCodePicker
+        android:id="@+id/countryPicker"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:ccp_areaCodeDetectedCountry="true"
+        android:layout_above="@id/centerHorizalLine"
         android:layout_centerInParent="true"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
-        android:id="@+id/countryPicker"
-        app:ccp_autoDetectCountry="true"
-        android:layout_above="@id/centerHorizalLine"
         android:layout_marginBottom="10dp"
-        />
+        app:ccp_areaCodeDetectedCountry="true"
+        app:ccp_autoDetectCountry="true" />
 
 
     <EditText
@@ -85,6 +84,7 @@
         android:layout_marginTop="30dp"
         android:visibility="invisible"
         android:layout_centerHorizontal="true"
+        android:id="@+id/progressLoading"
         />
 
 </RelativeLayout>

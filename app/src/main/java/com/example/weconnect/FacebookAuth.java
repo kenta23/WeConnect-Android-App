@@ -40,6 +40,7 @@ public class FacebookAuth extends LoginOrRegister {
         super.onCreate(savedInstanceState);
 
         callbackManager = CallbackManager.Factory.create();
+        mAuth = FirebaseAuth.getInstance();
 
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
 
@@ -74,7 +75,6 @@ public class FacebookAuth extends LoginOrRegister {
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
-        
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)

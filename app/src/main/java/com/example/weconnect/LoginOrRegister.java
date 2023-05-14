@@ -1,14 +1,10 @@
 package com.example.weconnect;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,12 +17,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginOrRegister extends AppCompatActivity {
 
@@ -36,7 +30,7 @@ public class LoginOrRegister extends AppCompatActivity {
       private FirebaseAuth auth;
       private ImageView googleButton;
       private ImageView facebookButton;
-      private ImageView githubButton;
+      private ImageView phoneOtp;
       private TextView register;
 
       //For google Authentication
@@ -57,7 +51,7 @@ public class LoginOrRegister extends AppCompatActivity {
         googleButton = findViewById(R.id.imgGoogle);
         facebookButton = findViewById(R.id.imgFacebook);
         register = findViewById(R.id.txtRegister);
-        githubButton = findViewById(R.id.imgGithub);
+        phoneOtp = findViewById(R.id.imgPhone);
 
         auth = FirebaseAuth.getInstance();
       //  FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -159,11 +153,11 @@ public class LoginOrRegister extends AppCompatActivity {
             }
         });
 
-        //GITHUB AUTHENTICATION
-        githubButton.setOnClickListener(new View.OnClickListener() {
+        //PHONE AUTHENTICATION
+        phoneOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginOrRegister.this, githubAuth.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                //startActivity(new Intent(LoginOrRegister.this, githubAuth.class).setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
 
             }
 

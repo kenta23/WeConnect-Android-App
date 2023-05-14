@@ -73,12 +73,12 @@ public class Register extends AppCompatActivity {
         dateButton.setText(getTodaysDate());
 
         //editText
-        firstName = findViewById(R.id.editFirstName);
-        lastName = findViewById(R.id.editLastName);
-        email = findViewById(R.id.editTextTextEmailAddress);
+        firstName = (EditText) findViewById(R.id.editFirstName);
+        lastName = (EditText) findViewById(R.id.editLastName);
+        email = (EditText) findViewById(R.id.editTextTextEmailAddress);
        // date = findViewById(R.id.dateButton);
-        password = findViewById(R.id.editPassword);
-        confirmPass = findViewById(R.id.editConfirmPassword);
+        password = (EditText) findViewById(R.id.editPassword);
+        confirmPass = (EditText) findViewById(R.id.editConfirmPassword);
 
         //Button
         signup = findViewById(R.id.btnSignup);
@@ -129,10 +129,6 @@ public class Register extends AppCompatActivity {
                     Toast.makeText( Register.this, "Please Enter re-enter email address", Toast.LENGTH_LONG).show();
                     email.setError("email is required");
                     email.requestFocus();
-                } else if(TextUtils.isEmpty(textBirthDate)){
-                    Toast.makeText( Register.this, "Please Enter your birthdate", Toast.LENGTH_LONG).show();
-                    date.setError("birthdate is required");
-                    date.requestFocus();
                 } else if ( radioGroupRegisterGender.getCheckedRadioButtonId() == -1){
                     Toast.makeText(Register.this, "Please select your gender", Toast.LENGTH_LONG).show();
                     radioButtonRegisteredGenderSelected.setError("Gender is required");
@@ -157,7 +153,7 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(Register.this, "Please click the box if you wish to proceed", Toast.LENGTH_LONG).show();
                     checkBox.setError("Checkbox is required to be able to proceed");
                     checkBox.requestFocus();
-                }else{
+                }else {
                     textGender = radioButtonRegisteredGenderSelected.getText().toString();
                     Users users = new Users(textFirstName, textLastName, textEmail, textBirthDate, textGender, textPassword); //put all the values needed
 
@@ -180,6 +176,19 @@ public class Register extends AppCompatActivity {
                                        // user.updateProfile(profileUpdates); */
 
 
+
+                                        firstName.setText("");
+                                        lastName.setText("");
+                                        email.setText("");
+                                       // date.setText("");
+                                        password.setText("");
+                                        Toast.makeText(Register.this,"Successfully Added",Toast.LENGTH_SHORT).show();
+
+
+                                        Intent intent = new Intent(Register.this, WelcomeUser.class);
+                                        startActivity(intent);
+                                        finish();
+
                                     }else{
                                         Toast.makeText(Register.this, "Registration Failed", Toast.LENGTH_SHORT).show();
 
@@ -199,23 +208,15 @@ public class Register extends AppCompatActivity {
 
 
                                     }
+
+
                                 }
                             });
 
-                            firstName.setText("");
-                            lastName.setText("");
-                            email.setText("");
-                            date.setText("");
-                            password.setText("");
-                            Toast.makeText(Register.this,"Successfully Added",Toast.LENGTH_SHORT).show();
+
                         }
                     });
 
-                    Intent intent = new Intent(Register.this, WelcomeUser.class);
-                    intent.putExtra("name", textFirstName);
-                    startActivity(intent);
-                    //Prevent user from returning back to Register Activity incase they click back button after Registration
-                    finish();
 
 
                 }

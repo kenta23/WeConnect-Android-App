@@ -30,7 +30,7 @@
             android:textSize="22sp" />
 
         <EditText
-            android:id="@+id/textCode"
+            android:id="@+id/editTextCode"
             android:layout_width="150dp"
             android:layout_height="55dp"
             android:layout_below="@id/textheading"
@@ -43,7 +43,7 @@
     <Button
         android:layout_width="140dp"
         android:layout_height="50dp"
-        android:layout_below="@id/textCode"
+        android:layout_below="@id/editTextCode"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_radius"
@@ -53,7 +53,7 @@
         android:id="@+id/verifyButton"/>
 
         <TextView
-            android:id="@+id/otherOption"
+            android:id="@+id/changePhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/verifyButton"

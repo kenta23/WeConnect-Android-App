@@ -91,16 +91,27 @@
      </LinearLayout>
     </RelativeLayout>
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpageMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/containerMenu"
+        android:layout_below="@+id/layoutSort"
+        android:contentDescription="main page">
+
+    </androidx.viewpager.widget.ViewPager>
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
+        android:id="@+id/containerMenu"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             android:baselineAligned="true"
 

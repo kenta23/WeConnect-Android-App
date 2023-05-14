@@ -190,6 +190,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
+
         <ImageView
             android:id="@+id/imgGoogle"
             android:layout_width="54dp"
@@ -197,22 +198,25 @@
             android:contentDescription="@string/googleplus"
             app:srcCompat="@drawable/googleplus" />
 
-
         <ImageView
             android:id="@+id/imgFacebook"
             android:layout_width="64dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/facebook"
-            app:srcCompat="@drawable/facebook" />
+            app:srcCompat="@drawable/facebook"
+            android:visibility="visible"
+            />
 
         <ImageView
-            android:id="@+id/imgGithub"
+            android:id="@+id/imgPhone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:contentDescription="@string/twitter"
-            app:srcCompat="@drawable/github"
-            tools:ignore="ImageContrastCheck,InefficientWeight" />
+            android:contentDescription="@string/Phone"
+            app:srcCompat="@drawable/baseline_phone_iphone_24"
+            tools:ignore="ImageContrastCheck,InefficientWeight"
+            android:visibility="visible"
+            />
 
     </LinearLayout>
 
@@ -250,14 +254,6 @@
         app:layout_constraintStart_toEndOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:layout_constraintVertical_bias="1.0" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="102dp">
-
-    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

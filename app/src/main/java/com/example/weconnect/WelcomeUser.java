@@ -32,7 +32,8 @@ public class WelcomeUser extends AppCompatActivity {
 
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
-    private TextView welcomeText;
+
+//  private TextView welcomeText;
     private Button continuebtn;
     private Button logout;
 
@@ -55,7 +56,7 @@ public class WelcomeUser extends AppCompatActivity {
         //firebase auth instance
 
 
-        welcomeText = findViewById(R.id.txtUserWelcome);
+      //  welcomeText = findViewById(R.id.txtUserWelcome);
         continuebtn = findViewById(R.id.btnContinue);
         logout = findViewById(R.id.buttonLogout);
 
@@ -65,19 +66,19 @@ public class WelcomeUser extends AppCompatActivity {
       //  GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
       //  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user != null) {
-            String name = user.getDisplayName();
+       /* if(googleAccount != null) {
+            String name = googleAccount.getDisplayName();
             welcomeText.setText("Welcome, " + name + "!");
         }
         else {
-            if(googleAccount != null)
+            if(user != null)
             {
-                String username = googleAccount.getDisplayName();
+                String username = user.getDisplayName();
                 welcomeText.setText("Welcome, " + username + "!");
             }
 
             //follows here
-        }
+        } */
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +94,7 @@ public class WelcomeUser extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(WelcomeUser.this, Chat.class);
                 startActivity(intent);
-                finish();
+
             }
         });
 
