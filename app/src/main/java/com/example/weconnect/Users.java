@@ -6,6 +6,7 @@ public class Users {
     public Users() {
 
     }
+
     public Users(String firstName, String lastName, String email, String birthdate, String gender, String password) {
         this.firstName = firstName;
         this.lastName = lastName;

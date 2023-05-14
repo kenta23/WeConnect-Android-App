@@ -112,118 +112,115 @@ public class Register extends AppCompatActivity {
 
 
                 // If Field Data is Empty
-                if(TextUtils.isEmpty(textFirstName)){
-                    Toast.makeText( Register.this, "Please Enter your first name", Toast.LENGTH_LONG).show();
+                if (TextUtils.isEmpty(textFirstName)) {
+                    Toast.makeText(Register.this, "Please Enter your first name", Toast.LENGTH_LONG).show();
                     firstName.setError("First name is required");
                     firstName.requestFocus();
-                } else if (TextUtils.isEmpty(textLastName)){
-                    Toast.makeText( Register.this, "Please Enter your last name", Toast.LENGTH_LONG).show();
+                } else if (TextUtils.isEmpty(textLastName)) {
+                    Toast.makeText(Register.this, "Please Enter your last name", Toast.LENGTH_LONG).show();
                     lastName.setError("Last name is required");
                     lastName.requestFocus();
 
-                } else if (TextUtils.isEmpty(textEmail)){
-                    Toast.makeText( Register.this, "Please Enter your email address", Toast.LENGTH_LONG).show();
+                } else if (TextUtils.isEmpty(textEmail)) {
+                    Toast.makeText(Register.this, "Please Enter your email address", Toast.LENGTH_LONG).show();
                     email.setError("email is required");
                     email.requestFocus();
-                } else if(!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()){
-                    Toast.makeText( Register.this, "Please Enter re-enter email address", Toast.LENGTH_LONG).show();
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()) {
+                    Toast.makeText(Register.this, "Please Enter re-enter email address", Toast.LENGTH_LONG).show();
                     email.setError("email is required");
                     email.requestFocus();
-                } else if ( radioGroupRegisterGender.getCheckedRadioButtonId() == -1){
+                } else if (radioGroupRegisterGender.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(Register.this, "Please select your gender", Toast.LENGTH_LONG).show();
                     radioButtonRegisteredGenderSelected.setError("Gender is required");
                     radioButtonRegisteredGenderSelected.requestFocus();
-                }else if (TextUtils.isEmpty(textPassword)){
+                } else if (TextUtils.isEmpty(textPassword)) {
                     Toast.makeText(Register.this, "Please enter your password", Toast.LENGTH_LONG).show();
                     password.setError("password is required");
                     password.requestFocus();
-                }else if(textPassword.length() < 8 ) {
+                } else if (textPassword.length() < 8) {
                     Toast.makeText(Register.this, "Password should be 8 characters long", Toast.LENGTH_LONG).show();
-                }else if(TextUtils.isEmpty(textConfirmPassword)){
+                } else if (TextUtils.isEmpty(textConfirmPassword)) {
                     Toast.makeText(Register.this, "Please confirm your password", Toast.LENGTH_LONG).show();
                     confirmPass.setError("Password is required");
                     confirmPass.requestFocus();
-                }else if (!textPassword.equals(textConfirmPassword)){
+                } else if (!textPassword.equals(textConfirmPassword)) {
                     Toast.makeText(Register.this, "Password doesn't match", Toast.LENGTH_LONG).show();
                     confirmPass.setError("Password confirmation required");
                     //clear entered password
                     password.clearComposingText();
                     confirmPass.clearComposingText();
-                }else if (!checkBox.isChecked()){
+                } else if (!checkBox.isChecked()) {
                     Toast.makeText(Register.this, "Please click the box if you wish to proceed", Toast.LENGTH_LONG).show();
                     checkBox.setError("Checkbox is required to be able to proceed");
                     checkBox.requestFocus();
-                }else {
+                } else {
                     textGender = radioButtonRegisteredGenderSelected.getText().toString();
-                    Users users = new Users(textFirstName, textLastName, textEmail, textBirthDate, textGender, textPassword); //put all the values needed
 
-                    db = FirebaseDatabase.getInstance();
-                    reference = db.getReference("Users");
-                    reference.child(textFirstName).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    registerUser(textFirstName, textLastName, textEmail, textBirthDate, textGender, textPassword);
+
+
+                }
+            }
+        });
+                    
+    }
+
+    private void registerUser(String textFirstName, String textLastName, String textEmail, String textBirthDate, String textGender, String textPassword) {
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        //Create User Profile
+        auth.createUserWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()) {
+
+                    FirebaseUser firebaseUser = auth.getCurrentUser();
+
+                    //Enter Data into Firebase
+                    Users users = new Users(textFirstName , textLastName , textEmail , textBirthDate, textGender , textPassword);
+
+                    //Extracting User for "Registered User" from Database
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(textFirstName);
+                    reference.child(firebaseUser.getUid()).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(Register.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                //Send Verification Email
+                                // firebaseUser.sendEmailVerification();
 
-                            auth.createUserWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(Register.this, "Account Registered", Toast.LENGTH_SHORT).show();
+                                //Open Login Page if Successful
+                                Intent intent = new Intent(Register.this, LoginOrRegister.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                                     /* FirebaseUser user = auth.getCurrentUser();
-                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                                .setDisplayName(textFirstName)
-                                                .build();
-                                       // user.updateProfile(profileUpdates); */
-
-
-
-                                        firstName.setText("");
-                                        lastName.setText("");
-                                        email.setText("");
-                                       // date.setText("");
-                                        password.setText("");
-                                        Toast.makeText(Register.this,"Successfully Added",Toast.LENGTH_SHORT).show();
-
-
-                                        Intent intent = new Intent(Register.this, WelcomeUser.class);
-                                        startActivity(intent);
-                                        finish();
-
-                                    }else{
-                                        Toast.makeText(Register.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-
-
-                                        try{
-                                            throw task.getException();
-                                        }catch (FirebaseAuthInvalidCredentialsException e){
-                                            email.setError("Your email is invalid. use a valid email");
-                                            email.requestFocus();
-                                        }catch (FirebaseAuthUserCollisionException e){
-                                            email.setError("User is already registered with this email. Please use another email.");
-                                            email.requestFocus();
-                                        }catch(Exception e){
-                                            Log.e(TAG, e.getMessage());
-                                            Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                                        }
-
-
-                                    }
-
-
-                                }
-                            });
-
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                Toast.makeText(Register.this, "Registration Failed", Toast.LENGTH_LONG).show();
+                            }
 
                         }
                     });
 
-
-
+                }else{
+                    try {
+                        throw task.getException();
+                    } catch(FirebaseAuthInvalidCredentialsException e){
+                        email.setError("Your Email is invalid or already in-use. Please use another email");
+                        email.requestFocus();
+                    } catch (FirebaseAuthUserCollisionException e ){
+                        email.setError("User is already registered with this email.");
+                        email.requestFocus();
+                    } catch(Exception e){
+                        Log.e(TAG , e.getMessage());
+                        Toast.makeText(Register.this, e.getMessage(), Toast.LENGTH_LONG );
+                    }
                 }
-
             }
         });
     }
+
 
     private String getTodaysDate() {
         Calendar cal = Calendar.getInstance();
