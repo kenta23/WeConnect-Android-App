@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -91,6 +92,8 @@ public class Register extends AppCompatActivity {
 
         checkBox = findViewById(R.id.chkAgreement);
         auth = FirebaseAuth.getInstance();
+
+
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -296,5 +299,7 @@ public class Register extends AppCompatActivity {
     public void openDatePicker (View view) {
         datePickerDialog.show();
     }
+
+
 
 }

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMenuProfile"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/primary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_vertical"
+            >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary"
+                android:minWidth="48dp"
+                android:layout_marginLeft="-18sp"
+                android:minHeight="48dp"
+                android:id="@+id/backButton"
+                android:src="@drawable/baseline_arrow_back_24"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Profile"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="40dp"
+            android:layout_centerVertical="true"
+            />
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_above="@+id/containerProfile"
+        android:id="@+id/cardViewprofile"
+        android:layout_marginBottom="35dp"
+        android:layout_centerHorizontal="true"
+        app:cardCornerRadius="130dp"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/userImageProfile"
+            android:scaleType="centerCrop"
+            />
+    </androidx.cardview.widget.CardView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/containerProfile">
+
+        <EditText
+            android:id="@+id/viewProfilename"
+            android:layout_width="190dp"
+            android:layout_height="50dp"
+
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="110dp"
+            android:hint="Enter your name"
+            android:paddingLeft="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/person"
+        app:tint="@color/primary"
+        android:layout_alignLeft="@+id/viewProfilename"
+        android:layout_marginLeft="-65dp"
+        android:layout_toLeftOf="@+id/viewProfilename"
+        android:layout_centerVertical="true"
+
+        android:layout_marginBottom="20dp"
+        >
+    </ImageView>
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/updateProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/containerProfile"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="25dp"
+        android:text="Update your Profile?"
+        android:textColor="#303030"
+        android:textSize="14dp">
+
+    </TextView>
+
+
+
+</RelativeLayout>

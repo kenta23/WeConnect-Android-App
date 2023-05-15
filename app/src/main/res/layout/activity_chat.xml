@@ -11,40 +11,27 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMenu"
-        android:layout_width="409dp"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/primary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-
-            app:srcCompat="@drawable/baseline_menu_24" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white"
+        >
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_logout_24"
-            android:id="@+id/logout"
-            />
 
     </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_below="@id/toolbarMenu"
         android:id="@+id/layoutSearchbar"
         android:background="#c9c9c9"
+        android:layout_below="@id/include"
         >
         <ImageView
             android:layout_width="40dp"
@@ -64,139 +51,60 @@
             />
     </RelativeLayout>
 
-    <RelativeLayout
+
+
+    <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutSearchbar"
-        android:paddingRight="10dp"
-        android:id="@+id/layoutSort"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/include"
+        app:tabTextColor="#77a3a7"
+        app:tabIndicatorColor="@color/white"
+        app:tabSelectedTextColor="@color/white"
+
+        app:tabIndicatorHeight="3dp"
+        android:layout_marginTop="0dp"
+        android:layout_below="@id/toolbarMenu"
+        android:contentDescription="tablayout"
+        android:backgroundTint="@color/primary"
         >
-  <LinearLayout
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_alignParentRight="true"
-      android:layout_centerVertical="true"
-      android:orientation="horizontal"
-      android:layout_centerInParent="true"
-      android:layout_centerHorizontal="true"
 
-     >
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chats"
+            android:id="@+id/chats">
 
-      <ImageView
-            android:id="@+id/imageviewSort"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/baseline_sort_24">
 
-        </ImageView>
+        </com.google.android.material.tabs.TabItem>
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Sort"
-          android:textSize="20sp"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:id="@+id/status">
 
-          />
+        </com.google.android.material.tabs.TabItem>
 
-  </LinearLayout>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calls"
+            android:id="@+id/calls">
 
-    </RelativeLayout>
+        </com.google.android.material.tabs.TabItem>
+    </com.google.android.material.tabs.TabLayout>
+
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpageMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/containerMenu"
-        android:layout_below="@+id/layoutSort"
-        android:contentDescription="main page">
+        android:layout_below="@+id/layoutSearchbar"
+        android:contentDescription="main page"
+        tools:ignore="SpeakableTextPresentCheck">
 
     </androidx.viewpager.widget.ViewPager>
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:id="@+id/containerMenu"
-        >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:baselineAligned="true"
-
-            >
-
-      <LinearLayout
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:orientation="vertical"
-       android:gravity="center"
-          android:id="@+id/contactContainer"
-          android:layout_weight="1"
-       >
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/baseline_contacts_24"
-
-                >
-            </ImageView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contacts"
-
-                />
-             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:id="@+id/chatContainer"
-                android:layout_weight="1"
-                >
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/baseline_chat_bubble_24"
-                    >
-                </ImageView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chat"
-
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:id="@+id/callsContainer"
-                android:layout_weight="1"
-                >
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/baseline_call_24"
-
-                    >
-                </ImageView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Calls"
-
-                    />
-            </LinearLayout>
-        </LinearLayout>
-
-    </androidx.appcompat.widget.Toolbar>
 
 </RelativeLayout>

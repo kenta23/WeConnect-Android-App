@@ -26,11 +26,14 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,6 +52,8 @@ public class LoginOrRegister extends AppCompatActivity {
       private TextView register;
   
      private TextView forgotPass;
+
+     private GoogleSignInAccount googleAccount;
 
    
 
@@ -147,17 +152,26 @@ public class LoginOrRegister extends AppCompatActivity {
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
 
+
         //save the last account logged that can't be auto erase even it exited the app
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct != null) {
             nextActivity();
+
         }
 
+        //GOOGLE AUTHENTICATION
         googleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               // String emailUser = acct.getEmail();
+
+
+
                 signGoogleAccount();
             }
+
+
         });
 
         //FACEBOOK AUTHENTICATION
@@ -219,20 +233,56 @@ public class LoginOrRegister extends AppCompatActivity {
 
 
 
-    private void nextActivity() {
-        finish();
-        startActivity(new Intent(LoginOrRegister.this, WelcomeUser.class));
+     private void nextActivity() {
+         GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+         String emailUser = signInAccount.getEmail();
+
+         finish();
+         startActivity(new Intent(LoginOrRegister.this, WelcomeUser.class));
+
+         //FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+      /*   authProfile.fetchSignInMethodsForEmail(emailUser)
+                 .addOnCompleteListener(task -> {
+                     if (task.isSuccessful()) {
+                         SignInMethodQueryResult result = task.getResult();
+                         if (result != null && result.getSignInMethods() != null && !result.getSignInMethods().isEmpty()) {
+                             // Email address is already registered
+                             // Display an error message to the user
+                             finish();
+                             startActivity(new Intent(LoginOrRegister.this, WelcomeUser.class));
+                         } else {
+                             // Email address is not registered, proceed with account creation
+                             // Call the Firebase Auth sign-in method with the Google credentials
+                             Intent intent = new Intent(LoginOrRegister.this, Profile.class);
+                            // intent.putExtra("Name", name);
+                             startActivity(intent);
+                             //finish();
+                         }
+                     } else {
+                         // An error occurred while checking the email address
+                         // Handle the error accordingly
+                         Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                     }
+                 }); /*
+
+
+        /* GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+         String name = acct.getDisplayName();
+         Intent intent = new Intent(LoginOrRegister.this, Profile.class);
+         intent.putExtra("Name", name);
+         startActivity(intent); */
+        // finish();
     }
-}
 
 
-    /*@Override
-    protected void onStart() {
+
+    @Override
+   protected void onStart() {
         super.onStart();
        if(authProfile.getCurrentUser() != null){
           startActivity(new Intent(LoginOrRegister.this, Chat.class));
            finish();
         }
     }
-}*/
+}
 

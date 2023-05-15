@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name of the user"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/cardViewofuser"
+            android:layout_marginLeft="12dp"
+            android:textStyle="bold"
+            android:textColor="#0b0b0b"
+            android:id="@+id/nameofuser"
+            >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status displays here"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="3dp"
+            android:id="@+id/userstatus"
+            android:layout_toRightOf="@+id/cardViewofuser"
+            android:layout_below="@+id/nameofuser"
+            android:textColor="#24252a"
+            >
+
+        </TextView>
+
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+
+            android:id="@+id/cardViewofuser"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            app:cardCornerRadius="55dp"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/userImageofChat"
+                android:scaleType="centerCrop"
+                />
+        </androidx.cardview.widget.CardView>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="#a6a6a6"
+            android:background="#a6a6a6"
+            android:layout_below="@id/cardViewofuser"
+            android:layout_toRightOf="@+id/cardViewofuser"
+            android:layout_marginTop="5dp">
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

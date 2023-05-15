@@ -117,7 +117,7 @@ public class Profile extends AppCompatActivity {
 
         //STORING DATA TO REALTIME DATABASE
         FirebaseDatabase firebasedatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebasedatabase.getReference(auth.getUid());
+        DatabaseReference databaseReference = firebasedatabase.getReference().child("Users").child(auth.getUid());
 
         //FROM OUR UserProfile Class we retrieve the value of name and uid
         UserProfile userprofile = new UserProfile(name, auth.getUid());
@@ -165,6 +165,7 @@ public class Profile extends AppCompatActivity {
                 Toast.makeText(Profile.this, "Image uploaded", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
+
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(Profile.this, "Image not Uploaded", Toast.LENGTH_SHORT).show();
@@ -207,5 +208,7 @@ public class Profile extends AppCompatActivity {
             imageviewImage.setImageURI(imagepath);
         }
         super.onActivityResult(requestCode, resultCode, data);
+
+
     }
 }
