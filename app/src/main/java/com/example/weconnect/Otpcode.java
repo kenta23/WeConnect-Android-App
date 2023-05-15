@@ -109,6 +109,7 @@ public class Otpcode extends AppCompatActivity {
                 }
 
                 // Show a message and update the UI
+                Toast.makeText(getApplicationContext(), "Verification failed", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -118,6 +119,7 @@ public class Otpcode extends AppCompatActivity {
                 // now need to ask the user to enter the code and then construct a credential
                 // by combining the code with a verification ID.
                 super.onCodeSent(verificationId, token);
+
                 Toast.makeText(getApplicationContext(), "OTP is sent", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.INVISIBLE);
                 codeSent=verificationId;
@@ -129,13 +131,13 @@ public class Otpcode extends AppCompatActivity {
         };
     }
 
-   // @Override
-    /*protected void onStart() {
+    @Override
+    protected void onStart() {
         super.onStart();
-        if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
-            Intent intent = new Intent(Otpcode.this, LoginOrRegister.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        if (auth.getCurrentUser() != null) {
+            Intent intent = new Intent(Otpcode.this, Chat.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
-    } */
+    }
 }

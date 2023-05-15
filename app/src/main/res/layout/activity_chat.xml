@@ -29,6 +29,14 @@
 
             app:srcCompat="@drawable/baseline_menu_24" />
 
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_logout_24"
+            android:id="@+id/logout"
+            />
+
     </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout

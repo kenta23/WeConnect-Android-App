@@ -45,7 +45,7 @@ public class OtpAuth extends AppCompatActivity {
 
         firebaseauth = FirebaseAuth.getInstance();
 
-        verifyButton.setOnClickListener(new View.OnClickListener() {
+        changePhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(OtpAuth.this, Otpcode.class);
@@ -82,7 +82,7 @@ public class OtpAuth extends AppCompatActivity {
                       else {
                           if(task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                               progressBar.setVisibility(View.INVISIBLE);
-                              Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
+                              Toast.makeText(getApplicationContext(), "Wrong code entered", Toast.LENGTH_SHORT).show();
                           }
                       }
                   }
