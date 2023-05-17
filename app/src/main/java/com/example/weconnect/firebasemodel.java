@@ -1,20 +1,21 @@
 package com.example.weconnect;
 
 public class firebasemodel {
+
     String name;
     String image;
     String uid;
     String status;
 
-    public firebasemodel() {
-
-    }
 
     public firebasemodel(String name, String image, String uid, String status) {
         this.name = name;
         this.image = image;
         this.uid = uid;
         this.status = status;
+    }
+
+    public firebasemodel() {
     }
 
     public String getName() {
@@ -48,6 +49,4 @@ public class firebasemodel {
     public void setStatus(String status) {
         this.status = status;
     }
-
-
 }

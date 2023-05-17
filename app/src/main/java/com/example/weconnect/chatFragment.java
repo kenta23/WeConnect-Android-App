@@ -21,57 +21,67 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
-public class chatFragment extends Fragment {
 
+public class chatFragment extends Fragment {
 
     private FirebaseFirestore firebaseFirestore;
     LinearLayoutManager linearLayoutManager;
     private FirebaseAuth firebaseAuth;
 
-    ImageView imageviewUser;
-    private RecyclerView recyclerView;
+    ImageView mimageviewofuser;
 
-    FirestoreRecyclerAdapter<firebasemodel, NoteViewHolder> chatAdapter;
+    FirestoreRecyclerAdapter<firebasemodel,NoteViewHolder> chatAdapter;
 
-
+    RecyclerView mrecyclerview;
 
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.chatfragment, container, false);
+        View v=inflater.inflate(R.layout.chatfragment,container,false);
 
-      firebaseAuth = FirebaseAuth.getInstance();
-      firebaseFirestore = FirebaseFirestore.getInstance();
-      recyclerView = v.findViewById(R.id.recyclerview);
+        firebaseAuth=FirebaseAuth.getInstance();
+        firebaseFirestore= FirebaseFirestore.getInstance();
+        mrecyclerview=v.findViewById(R.id.recyclerview);
 
 
-       Query query = firebaseFirestore.collection("Users");
-        FirestoreRecyclerOptions<firebasemodel> allusername = new FirestoreRecyclerOptions.Builder<firebasemodel>().setQuery(query, firebasemodel.class).build();
+        // Query query=firebaseFirestore.collection("Users");
+        Query query=firebaseFirestore.collection("Users").whereNotEqualTo("uid",firebaseAuth.getUid());
+        FirestoreRecyclerOptions<firebasemodel> allusername=new FirestoreRecyclerOptions.Builder<firebasemodel>().setQuery(query,firebasemodel.class).build();
 
-        chatAdapter = new FirestoreRecyclerAdapter<firebasemodel, NoteViewHolder>(allusername) {
+        chatAdapter=new FirestoreRecyclerAdapter<firebasemodel, NoteViewHolder>(allusername) {
             @Override
-            protected void onBindViewHolder(@NonNull NoteViewHolder holder, int i, @NonNull firebasemodel model) {
+            protected void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i, @NonNull firebasemodel firebasemodel) {
 
-                holder.particularusername.setText(model.getName());
-                String uri = model.getImage();
+                noteViewHolder.particularusername.setText(firebasemodel.getName());
+                String uri=firebasemodel.getImage();
 
-                Picasso.get().load(uri).into(imageviewUser);
-                if(model.getStatus().equals("Online")) {
-                    holder.statusofuser.setText(model.getStatus());
-                    holder.statusofuser.setTextColor(Color.GREEN);
-                } else {
-                    holder.statusofuser.setText(model.getStatus());
+                Picasso.get().load(uri).into(mimageviewofuser);
+                if(firebasemodel.getStatus().equals("Online"))
+                {
+                    noteViewHolder.statusofuser.setText(firebasemodel.getStatus());
+                    noteViewHolder.statusofuser.setTextColor(Color.GREEN);
                 }
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                else
+                {
+                    noteViewHolder.statusofuser.setText(firebasemodel.getStatus());
+                }
+
+                noteViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getActivity(), "Item is clicked", Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(getActivity(),ChatMain.class);
+                        intent.putExtra("name",firebasemodel.getName());
+                        intent.putExtra("receiveruid",firebasemodel.getUid());
+                        intent.putExtra("imageuri",firebasemodel.getImage());
+                        startActivity(intent);
                     }
                 });
+
 
 
             }
@@ -79,22 +89,27 @@ public class chatFragment extends Fragment {
             @NonNull
             @Override
             public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
                 View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.chatviewlayout,parent,false);
                 return new NoteViewHolder(view);
             }
         };
 
-        recyclerView.setHasFixedSize(true);
+
+        mrecyclerview.setHasFixedSize(true);
         linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(chatAdapter);
+        mrecyclerview.setLayoutManager(linearLayoutManager);
+        mrecyclerview.setAdapter(chatAdapter);
 
 
         return v;
 
 
+
+
     }
+
 
     public class NoteViewHolder extends RecyclerView.ViewHolder
     {
@@ -105,14 +120,15 @@ public class chatFragment extends Fragment {
         public NoteViewHolder(@NonNull View itemView) {
             super(itemView);
             particularusername=itemView.findViewById(R.id.nameofuser);
-            statusofuser=itemView.findViewById(R.id.userstatus);
-            imageviewUser=itemView.findViewById(R.id.userImageofChat);
+            statusofuser=itemView.findViewById(R.id.statusofuser);
+            mimageviewofuser=itemView.findViewById(R.id.imageviewofuser);
 
 
 
 
         }
     }
+
     @Override
     public void onStart() {
         super.onStart();
