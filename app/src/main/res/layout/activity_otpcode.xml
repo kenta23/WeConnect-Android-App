@@ -5,47 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Otpcode">
-    
+
+
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/logo_weconnect"
-        android:layout_marginTop="40dp"
-        android:id="@+id/logo"
         android:layout_centerHorizontal="true"
-        />
+        android:layout_marginTop="40dp"
+        android:id="@+id/logo">
+
+    </ImageView>
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="WeConnect will send OTP to your entered number"
+        android:text="Chat App Will Send OTP To Your Entered Number"
         android:textSize="20sp"
-        android:layout_marginTop="40dp"
         android:textAlignment="center"
-        android:textColor="@color/dark"
-        android:layout_below="@+id/logo"
-        android:id="@+id/textheadingOtpCode"
-        />
+
+        android:padding="20dp"
+        android:textColor="#6e6e6e"
+        android:layout_below="@id/logo"
+        android:id="@+id/textheading">
+
+    </TextView>
+
+
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:id="@+id/centerHorizalLine"
-        />
+        android:id="@+id/centerhorizontalline">
+
+    </RelativeLayout>
+
+
+
 
     <com.hbb20.CountryCodePicker
-        android:id="@+id/countryPicker"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_above="@id/centerHorizalLine"
+        app:ccp_areaCodeDetectedCountry="true"
         android:layout_centerInParent="true"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
+        android:id="@+id/countrycodepicker"
+        app:ccp_autoDetectCountry="true"
         android:layout_marginBottom="10dp"
-        app:ccp_areaCodeDetectedCountry="true"
-        app:ccp_autoDetectCountry="true" />
+        android:layout_above="@id/centerhorizontalline">
+
+    </com.hbb20.CountryCodePicker>
 
 
     <EditText
@@ -53,38 +66,44 @@
         android:layout_height="50dp"
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
-        android:id="@+id/getphone"
+        android:id="@+id/getphonenumber"
+        android:hint="Enter Your Number Here"
         android:textAlignment="center"
         android:inputType="number"
+        android:textColor="@color/black"
         android:layout_marginTop="10dp"
-        android:hint="Enter your Number here"
+        android:layout_below="@id/centerhorizontalline">
 
-        android:layout_below="@id/countryPicker"
-        />
+    </EditText>
+
+
 
     <android.widget.Button
-        android:id="@+id/sentOTP"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_below="@+id/getphone"
+        android:layout_height="40dp"
+        android:layout_below="@id/getphonenumber"
+        android:id="@+id/sendotpbutton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_radius"
-        android:backgroundTint="@color/primary"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:text="Sent OTP"
+        android:layout_marginTop="30dp"
         android:textColor="@color/white"
-        android:textSize="15sp" />
+        android:paddingLeft="40dp"
+        android:text="Sent OTP"
+        android:textSize="15sp"
+        android:paddingRight="40dp"
+        android:background="#25d366">
+
+    </android.widget.Button>
+
 
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sentOTP"
-        android:layout_marginTop="30dp"
-        android:visibility="invisible"
         android:layout_centerHorizontal="true"
-        android:id="@+id/progressLoading"
-        />
+        android:layout_below="@id/sendotpbutton"
+        android:id="@+id/progressbarofmain"
+        android:visibility="invisible"
+        android:layout_marginTop="30dp">
+
+    </ProgressBar>
 
 </RelativeLayout>

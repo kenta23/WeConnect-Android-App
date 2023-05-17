@@ -6,74 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".Chat"
     android:id="@+id/MainLayout"
-    android:background="#dee0df"
+    android:background="#7ecc94"
     >
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarMenu"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/primary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white"
-        >
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="0dp"
+        android:background="#075e54"
+        android:id="@+id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MyChatApp"
+                android:textSize="20sp"
+                android:id="@+id/myapptext"
+                android:textStyle="bold"
+                android:textColor="@color/white">
+
+            </TextView>
+
+
+        </RelativeLayout>
+
 
 
 
     </androidx.appcompat.widget.Toolbar>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:id="@+id/layoutSearchbar"
-        android:background="#c9c9c9"
-        android:layout_below="@id/include"
-        >
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="160dp"
-            android:src="@drawable/baseline_search_24"
-            android:id="@+id/searchMenu"
-            >
-
-        </ImageView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search"
-            android:layout_toRightOf="@+id/searchMenu"
-            android:layout_centerVertical="true"
-            />
-    </RelativeLayout>
-
-
-
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/include"
+        android:layout_below="@id/toolbar"
         app:tabTextColor="#77a3a7"
-        app:tabIndicatorColor="@color/white"
         app:tabSelectedTextColor="@color/white"
-
+        app:tabIndicatorColor="@color/white"
+        android:backgroundTint="#075e54"
         app:tabIndicatorHeight="3dp"
         android:layout_marginTop="0dp"
-        android:layout_below="@id/toolbarMenu"
-        android:contentDescription="tablayout"
-        android:backgroundTint="@color/primary"
         >
-
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Chats"
-            android:id="@+id/chats">
-
+            android:id="@+id/chat">
 
         </com.google.android.material.tabs.TabItem>
 
@@ -92,18 +74,21 @@
             android:id="@+id/calls">
 
         </com.google.android.material.tabs.TabItem>
+
+
+
     </com.google.android.material.tabs.TabLayout>
 
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpageMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/layoutSearchbar"
-        android:contentDescription="main page"
-        tools:ignore="SpeakableTextPresentCheck">
+        android:layout_below="@id/include"
+        android:layout_marginTop="0dp"
+        android:id="@+id/fragmentcontainer">
 
     </androidx.viewpager.widget.ViewPager>
+
 
 
 
