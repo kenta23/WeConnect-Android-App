@@ -88,7 +88,7 @@
 
 
                     <ImageView
-                        android:id="@+id/personalInfo"
+                        android:id="@+id/personalInfopic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -99,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="32dp"
-                        android:layout_toEndOf="@+id/personalInfo"
+                        android:layout_toEndOf="@+id/personalInfopic"
                         android:text="Personal Information"
                         android:textStyle="bold" />
 
@@ -147,7 +147,7 @@
 
 
                     <ImageView
-                        android:id="@+id/personalInfo"
+                        android:id="@+id/Notificationpic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -158,7 +158,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="32dp"
-                        android:layout_toEndOf="@+id/personalInfo"
+                        android:layout_toEndOf="@+id/Notificationpic"
                         android:text="Notification and Sounds"
                         android:textStyle="bold" />
 
@@ -168,7 +168,7 @@
 
                 <!-- Personal Information Button -->
                 <RelativeLayout
-                    android:id="@+id/personalinfomation"
+                    android:id="@+id/btnDevices"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
@@ -178,7 +178,7 @@
 
 
                     <ImageView
-                        android:id="@+id/personalInfo"
+                        android:id="@+id/Devicepic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -189,7 +189,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="32dp"
-                        android:layout_toEndOf="@+id/personalInfo"
+                        android:layout_toEndOf="@+id/Devicepic"
                         android:text="devices"
                         android:textStyle="bold" />
 
@@ -197,7 +197,7 @@
                 </RelativeLayout>
                 <!-- Personal Information Button -->
                 <RelativeLayout
-                    android:id="@+id/personalinfomation"
+                    android:id="@+id/btnLanguages"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"
@@ -207,7 +207,7 @@
 
 
                     <ImageView
-                        android:id="@+id/personalInfo"
+                        android:id="@+id/Buttonpic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -218,7 +218,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="32dp"
-                        android:layout_toEndOf="@+id/personalInfo"
+                        android:layout_toEndOf="@+id/Buttonpic"
                         android:text="Languages"
                         android:textStyle="bold" />
 
