@@ -18,6 +18,23 @@
         android:layout_height="wrap_content">
 
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/back_arrow"
+            android:padding="14dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+
+
 
 
 
@@ -28,7 +45,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,41 +54,27 @@
             android:orientation="vertical">
 
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:padding="12dp"
-                android:src="@drawable/profile1" />
-
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/generalsetting"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_gravity="center|top"
-                android:text="User Name here"
-                android:textColor="#3b2f2f"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Email here"
-                />
-
+                android:text="General Settings"
+                android:textStyle="bold"
+                android:layout_marginStart="20dp"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
 
 
             <LinearLayout
 
 
+
+                android:background="@drawable/round_back_secondary_100"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="1dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="40dp"
                 android:orientation="vertical"
                 android:padding="15dp">
 
@@ -103,10 +106,19 @@
                         android:text="Personal Information"
                         android:textStyle="bold" />
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/right_arrow_icon" />
+
 
                 </RelativeLayout>
 
-                <!-- Personal Information Button -->
+
+
+                <!-- Chat Folder Button -->
                 <RelativeLayout
                     android:id="@+id/btnChatfolder"
                     android:layout_width="match_parent"
@@ -132,10 +144,17 @@
                         android:text="Chat Folders"
                         android:textStyle="bold" />
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/right_arrow_icon" />
+
 
                 </RelativeLayout>
 
-                <!-- Personal Information Button -->
+                <!-- Notification Button -->
                 <RelativeLayout
                     android:id="@+id/btnNotification"
                     android:layout_width="match_parent"
@@ -162,11 +181,17 @@
                         android:text="Notification and Sounds"
                         android:textStyle="bold" />
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/right_arrow_icon" />
 
 
                 </RelativeLayout>
 
-                <!-- Personal Information Button -->
+                <!-- Devices Button -->
                 <RelativeLayout
                     android:id="@+id/btnDevices"
                     android:layout_width="match_parent"
@@ -193,9 +218,17 @@
                         android:text="devices"
                         android:textStyle="bold" />
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/right_arrow_icon" />
 
                 </RelativeLayout>
-                <!-- Personal Information Button -->
+
+
+                <!-- Languages Button -->
                 <RelativeLayout
                     android:id="@+id/btnLanguages"
                     android:layout_width="match_parent"
@@ -222,12 +255,307 @@
                         android:text="Languages"
                         android:textStyle="bold" />
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/right_arrow_icon" />
 
                 </RelativeLayout>
 
 
+            </LinearLayout>
+
+            <TextView
+            android:id="@+id/securityandprivacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Security and Privacy"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+
+
+
+                android:background="@drawable/round_back_secondary_100"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+
+
+                <!-- Security Button -->
+                <RelativeLayout
+                    android:id="@+id/btnSecurity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:minHeight="48dp"
+                    android:onClick="onRelativeLayoutClicked"
+                    tools:ignore="DuplicateIds">
+
+
+                    <ImageView
+                        android:id="@+id/securitypic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/security" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_toEndOf="@+id/securitypic"
+                        android:text="Security"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/right_arrow_icon" />
+
+
+                </RelativeLayout>
+
+                <!-- Block Account Button -->
+                <RelativeLayout
+                    android:id="@+id/btnBlockedAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:minHeight="48dp"
+                    android:onClick="onRelativeLayoutClicked"
+                    tools:ignore="DuplicateIds">
+
+
+                    <ImageView
+                        android:id="@+id/blockuserpic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/block_user" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_toEndOf="@+id/blockuserpic"
+                        android:text="Blocked Accounts"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/right_arrow_icon" />
+
+
+                </RelativeLayout>
+
+                <!-- Passwords Button -->
+                <RelativeLayout
+                    android:id="@+id/btnPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:minHeight="48dp"
+                    android:onClick="onRelativeLayoutClicked"
+                    tools:ignore="DuplicateIds">
+
+
+                    <ImageView
+                        android:id="@+id/passwordpic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/password" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_toEndOf="@+id/passwordpic"
+                        android:text="Passwords"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/right_arrow_icon" />
+
+
+                </RelativeLayout>
+
 
             </LinearLayout>
+
+
+
+
+
+            <TextView
+                android:id="@+id/appearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Appearance"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+
+            android:background="@drawable/round_back_secondary_100"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+
+            <!-- Theme Button -->
+            <RelativeLayout
+                android:id="@+id/btnTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:minHeight="48dp"
+                android:onClick="onRelativeLayoutClicked"
+                tools:ignore="DuplicateIds">
+
+
+                <ImageView
+                    android:id="@+id/themepic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/themes" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_toEndOf="@+id/themepic"
+                    android:text="Theme"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_icon" />
+
+
+            </RelativeLayout>
+
+
+            <!-- Display Button -->
+            <RelativeLayout
+                android:id="@+id/btnDisplay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:minHeight="48dp"
+                android:onClick="onRelativeLayoutClicked"
+                tools:ignore="DuplicateIds">
+
+
+                <ImageView
+                    android:id="@+id/Displaypic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/monitor" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_toEndOf="@+id/Displaypic"
+                    android:text="Display"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_icon" />
+
+
+            </RelativeLayout>
+
+            <!-- Font Button -->
+            <RelativeLayout
+                android:id="@+id/btnFont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:minHeight="48dp"
+                android:onClick="onRelativeLayoutClicked"
+                tools:ignore="DuplicateIds">
+
+
+                <ImageView
+                    android:id="@+id/fontpic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/font_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_toEndOf="@+id/fontpic"
+                    android:text="Font"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_icon" />
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
 
 
 
