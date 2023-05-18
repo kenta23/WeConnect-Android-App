@@ -10,7 +10,7 @@ public class UserProfile {
 
     public UserProfile(String username, String userID) {
         this.username = username;
-        this.userID = userID;
+        this.userID = userID != null ? userID : " ";
     }
 
     public String getUsername() {

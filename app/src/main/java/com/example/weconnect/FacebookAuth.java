@@ -114,7 +114,7 @@ public class FacebookAuth extends LoginOrRegister {
         request.setParameters(parameters);
         request.executeAsync();
 
-        Intent intent = new Intent(FacebookAuth.this, WelcomeUser.class);
+        Intent intent = new Intent(FacebookAuth.this, Profile.class);
 
         intent.putExtra("name", name[0]);
         startActivity(intent);

@@ -75,10 +75,6 @@
 
 
         </RelativeLayout>
-
-
-
-
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -133,7 +129,6 @@
             android:src="@drawable/baseline_arrow_forward_24"
             app:tint="@color/white"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck">
-
         </ImageButton>
 
 

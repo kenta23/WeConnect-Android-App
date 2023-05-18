@@ -26,6 +26,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.ktx.Firebase;
 
 public class WelcomeUser extends AppCompatActivity {
@@ -35,6 +36,8 @@ public class WelcomeUser extends AppCompatActivity {
     private TextView welcomeText;
     private Button continuebtn;
     private Button logout;
+
+    private FirebaseUser currentUser;
 
     FirebaseUser user;
     FirebaseAuth authProfile;
@@ -63,10 +66,13 @@ public class WelcomeUser extends AppCompatActivity {
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this, gso);
 
-      //  GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-      //  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        authProfile = FirebaseAuth.getInstance();
+        currentUser = authProfile.getCurrentUser();
 
-        if (user != null) {
+        //  GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+       //  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+       /* if (user != null) {
             String name = user.getDisplayName();
             welcomeText.setText("Welcome, " + name + "!");
         } else {
@@ -74,9 +80,9 @@ public class WelcomeUser extends AppCompatActivity {
                 String username = googleAccount.getDisplayName();
                 welcomeText.setText("Welcome, " + username + "!");
             }
-
             //follows here
-        }
+        } */
+
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,13 +96,53 @@ public class WelcomeUser extends AppCompatActivity {
         continuebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(WelcomeUser.this, Chat.class);
-                startActivity(intent);
-                finish();
+                if(googleAccount!=null || user != null) {
+
+                    Intent intent = new Intent(WelcomeUser.this, Chat.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+                else {
+                    Intent intent = new Intent(WelcomeUser.this, Profile.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+
             }
         });
 
+        // Check if user is already logged in
+
+        if (currentUser != null) {
+            displayAccountName(currentUser);
+        }
+
     }
+
+    // Method to display the account name
+    private void displayAccountName(FirebaseUser user) {
+        String accountName = "";
+        String providerId = user.getProviderId();
+
+        if (providerId.equals("google.com")) {
+            accountName = user.getDisplayName();
+        } else if (providerId.equals("facebook.com")) {
+            accountName = user.getDisplayName();
+        } else if (providerId.equals("phone")) {
+            // If using Phone authentication, you can retrieve the account name from the PhoneAuthCredential
+            PhoneAuthCredential credential = (PhoneAuthCredential) user.getProviderData().get(0);
+            accountName = credential.getProvider();
+        } else if (providerId.equals("password")) {
+            accountName = user.getEmail();
+        }
+
+        // Display the account name in your UI
+        welcomeText.setText("Welcome "+accountName);
+    }
+
+
     public void signOut() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeUser.this);

@@ -16,8 +16,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class OtpAuth extends AppCompatActivity {
 
@@ -27,7 +34,12 @@ public class OtpAuth extends AppCompatActivity {
     String enteredotp;
 
     FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
+
+
     ProgressBar mprogressbarofotpauth;
+
+
 
 
 
@@ -42,7 +54,7 @@ public class OtpAuth extends AppCompatActivity {
         mgetotp=findViewById(R.id.getotp);
         mprogressbarofotpauth=findViewById(R.id.progressbarofotpauth);
 
-        firebaseAuth=FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         mchangenumber.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +81,36 @@ public class OtpAuth extends AppCompatActivity {
                     PhoneAuthCredential credential= PhoneAuthProvider.getCredential(coderecieved,enteredotp);
                     signInWithPhoneAuthCredential(credential);
 
+
+                    // String uid = "userUID"; // Replace with the actual UID you want to check
+                   // String userUID = null;
+                  // FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
+                  //  DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+                  //  Query query = databaseReference.child(firebaseAuth.getUid()).equalTo(userUID);
+
+                  /*   databaseReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                           UserProfile muserprofile = snapshot.getValue(UserProfile.class);
+                            String uid = muserprofile.getUserID();
+
+                            if(user.getUid() == uid) {
+                                Toast.makeText(OtpAuth.this, "account already existed", Toast.LENGTH_SHORT).show();
+                            }
+                            else  {
+                                Toast.makeText(OtpAuth.this, "Account is new", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                            Toast.makeText(getApplicationContext(),"Failed To Fetch",Toast.LENGTH_SHORT).show();
+                        }
+                    }); */
+
+
                 }
             }
         });
@@ -83,10 +125,11 @@ public class OtpAuth extends AppCompatActivity {
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 if(task.isSuccessful())
                 {
                     mprogressbarofotpauth.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getApplicationContext(),"Login sucess",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Login success",Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(OtpAuth.this,Profile.class);
                     startActivity(intent);
                     finish();

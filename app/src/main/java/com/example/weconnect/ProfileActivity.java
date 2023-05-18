@@ -14,8 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +53,11 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseStorage firebaseStorage;
 
 
+    GoogleSignInAccount googleAccount;
+
+    FirebaseUser user;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +73,13 @@ public class ProfileActivity extends AppCompatActivity {
         firebaseDatabase=FirebaseDatabase.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
         firebaseStorage=FirebaseStorage.getInstance();
+
+
+        //if user logged in using google account
+        googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+
+
+        user = firebaseAuth.getCurrentUser();
 
 
         setSupportActionBar(mtoolbarofviewprofile);
@@ -87,11 +102,13 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+
+
         DatabaseReference databaseReference=firebaseDatabase.getReference(firebaseAuth.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserProfile muserprofile=snapshot.getValue(UserProfile.class);
+                UserProfile muserprofile = snapshot.getValue(UserProfile.class);
                 mviewusername.setText(muserprofile.getUsername());
             }
 
@@ -101,6 +118,8 @@ public class ProfileActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Failed To Fetch",Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
 
         mmovetoupdateprofile.setOnClickListener(new View.OnClickListener() {
