@@ -55,6 +55,8 @@ public class LoginOrRegister extends AppCompatActivity {
 
      private GoogleSignInAccount googleAccount;
 
+     FirebaseUser user;
+
    
 
     private FirebaseAuth authProfile;
@@ -123,15 +125,29 @@ public class LoginOrRegister extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginOrRegister.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginOrRegister.this, Profile.class);
-                          //  intent.putExtra("email", emailString);
-                            startActivity(intent);
+
+                            //get the user's email auth
+                            user = task.getResult().getUser();
+
+                            if(user != null) {
+                                //if email is existed already in Firebase auth
+                                Toast.makeText(LoginOrRegister.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginOrRegister.this, Chat.class);
+                                //intent.putExtra("email", emailString);
+                                startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText(LoginOrRegister.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginOrRegister.this, Profile.class);
+                                //  intent.putExtra("email", emailString);
+                                startActivity(intent);
+                            }
+
                         } else {
                             try {
                                 throw task.getException();
                             } catch (FirebaseAuthInvalidUserException e) {
-                                email.setError("User does not exist");
+                                email.setError("Email does not exist");
                                 email.requestFocus();
                             } catch (FirebaseAuthInvalidCredentialsException e) {
                                 password.setError("Wrong Password");

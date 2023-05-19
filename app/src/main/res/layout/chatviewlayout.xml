@@ -45,7 +45,22 @@
         </TextView>
 
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop= "30dp"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textSize="18dp"
+            android:visibility="invisible"
+            android:background="@drawable/backgroundnewmessages"
+            android:textAlignment="textEnd"
+            android:id="@+id/newMessages"
+            />
 
         <androidx.cardview.widget.CardView
             android:layout_width="55dp"
@@ -67,6 +82,8 @@
                 android:scaleType="centerCrop">
 
             </ImageView>
+
+
 
 
 

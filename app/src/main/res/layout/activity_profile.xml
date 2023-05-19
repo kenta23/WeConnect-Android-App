@@ -49,15 +49,14 @@
 
 
     <EditText
+        android:id="@+id/getusername"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:inputType="textCapWords"
-        android:hint="Enter Your Name Here"
         android:layout_centerInParent="true"
-        android:id="@+id/getusername"
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
-        >
+        android:hint="Enter Your Name Here"
+        android:inputType="textCapWords">
 
     </EditText>
 

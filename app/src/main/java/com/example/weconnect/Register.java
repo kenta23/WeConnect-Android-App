@@ -180,6 +180,9 @@ public class Register extends AppCompatActivity {
 
                 //Extracting User for "Registered User" from Database
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+
+                DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference(auth.getUid());
+
                 reference.child(firebaseUser.getUid()).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -189,7 +192,7 @@ public class Register extends AppCompatActivity {
                             // firebaseUser.sendEmailVerification();
 
                             //Open Login Page if Successful
-                            Intent intent = new Intent(Register.this, LoginOrRegister.class);
+                            Intent intent = new Intent(Register.this, Profile.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                             startActivity(intent);

@@ -3,7 +3,9 @@ package com.example.weconnect;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -128,11 +130,28 @@ public class OtpAuth extends AppCompatActivity {
 
                 if(task.isSuccessful())
                 {
-                    mprogressbarofotpauth.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getApplicationContext(),"Login success",Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(OtpAuth.this,Profile.class);
-                    startActivity(intent);
-                    finish();
+                        // Phone number authentication successful
+                        FirebaseUser user = task.getResult().getUser();
+
+                        // Check if phone number already exists in Firebase Auth
+                        if (user.getMetadata().getCreationTimestamp() == user.getMetadata().getLastSignInTimestamp()) {
+                            // New user, perform actions for a new user
+                            //direct to the Profile class to create username and new profile picture
+                            mprogressbarofotpauth.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getApplicationContext(),"Login success",Toast.LENGTH_SHORT).show();
+
+                            Intent intent=new Intent(OtpAuth.this,Profile.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            // Existing user, perform actions for an existing user
+                            mprogressbarofotpauth.setVisibility(View.INVISIBLE);
+                            Toast.makeText(getApplicationContext(),"Login success",Toast.LENGTH_SHORT).show();
+
+                            Intent intent=new Intent(OtpAuth.this,Chat.class);
+                            startActivity(intent);
+                            finish();
+                        }
                 }
                 else
                 {
