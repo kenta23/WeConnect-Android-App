@@ -42,22 +42,19 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginOrRegister extends AppCompatActivity {
 
-      private EditText email;
-      private EditText password;
-      private Button login;
+    private EditText email;
+    private EditText password;
+    private Button login;
 
-      private ImageView googleButton;
-      private ImageView facebookButton;
-      private ImageView phoneOtp;
-      private TextView register;
-  
-     private TextView forgotPass;
+    private ImageView googleButton;
+    private ImageView facebookButton;
+    private ImageView phoneOtp;
+    private TextView register;
 
-     private GoogleSignInAccount googleAccount;
+    private TextView forgotPass;
 
-     FirebaseUser user;
+    private GoogleSignInAccount googleAccount;
 
-   
 
     private FirebaseAuth authProfile;
     //For google Authentication
@@ -92,8 +89,8 @@ public class LoginOrRegister extends AppCompatActivity {
             }
         });
 
-   
-           // Login Button
+
+        // Login Button
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,21 +98,19 @@ public class LoginOrRegister extends AppCompatActivity {
                 String textPassword = password.getText().toString();
 
                 if (TextUtils.isEmpty(textEmail)) {
-                    Toast.makeText(LoginOrRegister.this, "Please Enter your Email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginOrRegister.this, "Please enter your Email", Toast.LENGTH_SHORT).show();
                     email.setError("Field is empty");
                     email.requestFocus();
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()) {
                     Toast.makeText(LoginOrRegister.this, "Valid email is required", Toast.LENGTH_SHORT).show();
-                    email.setError("enter a valid email address");
+                    email.setError("Enter a valid email address");
                     email.requestFocus();
                 } else if (TextUtils.isEmpty(textPassword)) {
-                    Toast.makeText(LoginOrRegister.this, "Please Enter your Password", Toast.LENGTH_SHORT).show();
-                    password.setError("Field is Empty");
+                    Toast.makeText(LoginOrRegister.this, "Please enter your Password", Toast.LENGTH_SHORT).show();
+                    password.setError("Field is empty");
                     password.requestFocus();
                 } else {
-
                     loginUser(textEmail, textPassword);
-
                 }
             }
 
@@ -125,28 +120,14 @@ public class LoginOrRegister extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
-                            //get the user's email auth
-                            user = task.getResult().getUser();
-                            if(user != null) {
-                                //if email is existed already in Firebase auth
-                                Toast.makeText(LoginOrRegister.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginOrRegister.this, Chat.class);
-                                //intent.putExtra("email", emailString);
-                                startActivity(intent);
-                            }
-                            else {
-                                Toast.makeText(LoginOrRegister.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginOrRegister.this, Profile.class);
-                                //  intent.putExtra("email", emailString);
-                                startActivity(intent);
-                            }
-
+                            checkUser();
+                            Toast.makeText(LoginOrRegister.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            finish();
                         } else {
                             try {
                                 throw task.getException();
                             } catch (FirebaseAuthInvalidUserException e) {
-                                email.setError("Email does not exist");
+                                email.setError("User does not exist");
                                 email.requestFocus();
                             } catch (FirebaseAuthInvalidCredentialsException e) {
                                 password.setError("Wrong Password");
@@ -156,9 +137,9 @@ public class LoginOrRegister extends AppCompatActivity {
                                 Toast.makeText(LoginOrRegister.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
 
-                                }
-                            }
-                        });
+                        }
+                    }
+                });
             }
         });
 
@@ -169,7 +150,7 @@ public class LoginOrRegister extends AppCompatActivity {
 
         //save the last account logged that can't be auto erase even it exited the app
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        if(acct != null) {
+        if (acct != null) {
             nextActivity();
 
         }
@@ -178,7 +159,9 @@ public class LoginOrRegister extends AppCompatActivity {
         googleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // String emailUser = acct.getEmail();
+                // String emailUser = acct.getEmail();
+
+
                 signGoogleAccount();
             }
 
@@ -211,29 +194,30 @@ public class LoginOrRegister extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent = new Intent(LoginOrRegister.this, Register.class);
-               startActivity(intent);
+                Intent intent = new Intent(LoginOrRegister.this, Register.class);
+                startActivity(intent);
 
 
             }
         });
 
     }
+
     public void signGoogleAccount() {
-       Intent signInIntent = gsc.getSignInIntent();
-       startActivityForResult(signInIntent, 1000);
+        Intent signInIntent = gsc.getSignInIntent();
+        startActivityForResult(signInIntent, 1000);
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1000) {
+        if (requestCode == 1000) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
                 task.getResult(ApiException.class);
-                 nextActivity();
+                nextActivity();
             } catch (ApiException e) {
                 Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
@@ -242,16 +226,15 @@ public class LoginOrRegister extends AppCompatActivity {
     }
 
 
+    private void nextActivity() {
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        String emailUser = signInAccount.getEmail();
 
+        finish();
+        startActivity(new Intent(LoginOrRegister.this, WelcomeUser.class));
 
-     private void nextActivity() {
-         GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
-         String emailUser = signInAccount.getEmail();
-
-         startActivity(new Intent(LoginOrRegister.this, WelcomeUser.class));
-
-         //FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-      /*  authProfile.fetchSignInMethodsForEmail(emailUser)
+        //FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+      /*   authProfile.fetchSignInMethodsForEmail(emailUser)
                  .addOnCompleteListener(task -> {
                      if (task.isSuccessful()) {
                          SignInMethodQueryResult result = task.getResult();
@@ -285,14 +268,25 @@ public class LoginOrRegister extends AppCompatActivity {
     }
 
 
-
     @Override
-   protected void onStart() {
+    protected void onStart() {
         super.onStart();
-       if(authProfile.getCurrentUser() != null){
-          startActivity(new Intent(LoginOrRegister.this, Chat.class));
-           finish();
+        if (authProfile.getCurrentUser() != null) {
+            startActivity(new Intent(LoginOrRegister.this, Chat.class));
+            finish();
+        }
+    }
+
+    private void checkUser() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            // User is already logged in, navigate to the chat page
+            startActivity(new Intent(LoginOrRegister.this, Chat.class));
+            finish();
         }
     }
 }
+
+
+
 
