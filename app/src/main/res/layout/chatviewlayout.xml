@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="90dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/backgroundChat"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -10,9 +12,9 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
-        android:paddingBottom="-5dp">
+        android:paddingBottom="-5dp"
 
-
+        >
 
 
         <TextView
@@ -25,7 +27,7 @@
             android:textSize="20sp"
             android:id="@+id/nameofuser"
             android:textStyle="bold"
-            android:textColor="#0b0b0b">
+            >
 
         </TextView>
 
@@ -40,7 +42,8 @@
             android:layout_toRightOf="@id/cardviewofuser"
             android:id="@+id/statusofuser"
             android:layout_below="@id/nameofuser"
-            android:textColor="#6a6a6a">
+
+            >
 
         </TextView>
 
@@ -60,6 +63,7 @@
             android:background="@drawable/backgroundnewmessages"
             android:textAlignment="textEnd"
             android:id="@+id/newMessages"
+
             />
 
         <androidx.cardview.widget.CardView

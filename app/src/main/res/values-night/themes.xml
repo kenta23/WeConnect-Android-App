@@ -12,5 +12,44 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#24252a</item>
         <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--background color -->
+    <style name="background">
+        <item name="android:background">@color/dark</item>
+    </style>
+
+    <!--text color -->
+    <style name="textcolor">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--CHAT activity -->
+    <style name="backgroundChat">
+        <item  name="android:background">@color/dark</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+<!--styles in Profile activity -->
+    <style name="backgroundProfile">
+        <item name="android:background">
+            @color/dark
+        </item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+    </style>
+
+    <!--styles in Settings activity -->
+    <style name="backgroundSettings">
+        <item name="android:background">
+            @color/dark
+        </item>
+        <item name="android:textColor">@color/white</item>
+        <item  name="android:tint">@color/white</item>
+    </style>
+
+    <style name="backgroundLinearLayoutSettings">
+        <item name="android:background">@drawable/round</item>
     </style>
 </resources>

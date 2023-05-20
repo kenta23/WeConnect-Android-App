@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Chat"
     android:id="@+id/MainLayout"
-    android:background="#7ecc94"
+    style="@style/backgroundChat"
     >
 
     <androidx.appcompat.widget.Toolbar

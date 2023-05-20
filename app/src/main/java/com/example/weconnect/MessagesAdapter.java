@@ -70,10 +70,7 @@ public class MessagesAdapter extends RecyclerView.Adapter {
             viewHolder.timeofmessage.setText(messages.getCurrenttime());
         }
 
-
-
     }
-
 
     @Override
     public int getItemViewType(int position) {
@@ -93,13 +90,6 @@ public class MessagesAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return messagesArrayList.size();
     }
-
-
-
-
-
-
-
 
     class SenderViewHolder extends RecyclerView.ViewHolder
     {
@@ -128,8 +118,4 @@ public class MessagesAdapter extends RecyclerView.Adapter {
             timeofmessage=itemView.findViewById(R.id.timeofmessage);
         }
     }
-
-
-
-
 }

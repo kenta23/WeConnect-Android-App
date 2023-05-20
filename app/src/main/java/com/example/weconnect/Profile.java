@@ -138,9 +138,9 @@ public class Profile extends AppCompatActivity {
 
     private void sendDataToRealTimeDatabase()
     {
-
+        user = firebaseAuth.getCurrentUser();
         //if user logged using google
-        if(googleuser != null) {
+        if(user != null && user.getProviderId().equals("google.com")) {
             sendDataFromGoogle(name);
         }
         else {
@@ -157,6 +157,7 @@ public class Profile extends AppCompatActivity {
         }
 
     }
+
 
     private void sendDataFromGoogle (String nameUser) {
         nameUser = mgetusername.getText().toString().trim();

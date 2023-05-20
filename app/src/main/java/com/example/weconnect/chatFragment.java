@@ -106,8 +106,6 @@ public class chatFragment extends Fragment {
         return v;
 
 
-
-
     }
 
 
@@ -122,8 +120,6 @@ public class chatFragment extends Fragment {
             particularusername=itemView.findViewById(R.id.nameofuser);
             statusofuser=itemView.findViewById(R.id.statusofuser);
             mimageviewofuser=itemView.findViewById(R.id.imageviewofuser);
-
-
 
 
         }

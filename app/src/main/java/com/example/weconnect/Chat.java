@@ -49,7 +49,7 @@ public class Chat extends AppCompatActivity {
         mstatus=findViewById(R.id.status);
         viewPager=findViewById(R.id.fragmentcontainer);
 
-        firebaseFirestore=FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
 
         mtoolbar=findViewById(R.id.toolbar);
@@ -110,8 +110,9 @@ public class Chat extends AppCompatActivity {
                 startActivity(intentSettings);
                 break;
             case R.id.logoutProfile:
-                firebaseAuth.signOut();
+                FirebaseAuth.getInstance().signOut();
                 Toast.makeText(getApplicationContext(),"Signing out",Toast.LENGTH_SHORT).show();
+
                 Intent mainpageIntent = new Intent(Chat.this, LoginOrRegister.class);
                 mainpageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(mainpageIntent);

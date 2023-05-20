@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    style="@style/backgroundProfile"
     tools:context=".ProfileActivity">
 
 
@@ -121,8 +121,7 @@
         android:paddingRight="20dp"
         android:paddingBottom="10dp"
         android:text="Want To Update Your Profile ?"
-        android:textSize="17sp"
-        android:textColor="#303030">
+        android:textSize="17sp">
 
     </TextView>
 

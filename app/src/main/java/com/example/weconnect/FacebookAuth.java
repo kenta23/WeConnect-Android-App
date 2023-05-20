@@ -85,6 +85,18 @@ public class FacebookAuth extends LoginOrRegister {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+
+                            if (task.getResult().getAdditionalUserInfo().isNewUser()) {
+                                // This is a new user, perform actions for a new user
+                                // For example, you can redirect them to a setup screen or show a welcome message
+                                updateUI(user);
+                            } else {
+                                // This is an existing user, perform actions for an existing user
+                                // For example, you can redirect them to the main screen or load their data
+                                Intent intent = new Intent(FacebookAuth.this, Chat.class);
+                                startActivity(intent);
+                                finish();
+                            }
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(FacebookAuth.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
@@ -113,6 +125,9 @@ public class FacebookAuth extends LoginOrRegister {
         parameters.putString("fields", "name");
         request.setParameters(parameters);
         request.executeAsync();
+
+
+
 
         Intent intent = new Intent(FacebookAuth.this, Profile.class);
 
