@@ -23,12 +23,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Chat App Will Send OTP To Your Entered Number"
+        android:text="WeConnect Will Send OTP To Your Entered Number"
         android:textSize="20sp"
         android:textAlignment="center"
-
         android:padding="20dp"
-        android:textColor="#6e6e6e"
         android:layout_below="@id/logo"
         android:id="@+id/textheading">
 
@@ -57,9 +55,7 @@
         android:layout_marginRight="100dp"
         android:layout_marginBottom="10dp"
         app:ccp_areaCodeDetectedCountry="true"
-        app:ccp_autoDetectCountry="true"
-
-        >
+        app:ccp_autoDetectCountry="true">
 
     </com.hbb20.CountryCodePicker>
 
@@ -73,7 +69,7 @@
         android:hint="Enter Your Number Here"
         android:textAlignment="center"
         android:inputType="number"
-        android:textColor="@color/black"
+
         android:layout_marginTop="10dp"
         android:layout_below="@id/centerhorizontalline">
 

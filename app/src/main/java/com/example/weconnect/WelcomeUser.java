@@ -44,7 +44,6 @@ public class WelcomeUser extends AppCompatActivity {
     GoogleSignInAccount googleAccount;
 
 
-    @SuppressLint("MissingInflatedId")
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,14 +82,12 @@ public class WelcomeUser extends AppCompatActivity {
             //follows here
         } */
 
-
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                signOut();
             }
         });
-
 
 
         continuebtn.setOnClickListener(new View.OnClickListener() {
@@ -163,9 +160,6 @@ public class WelcomeUser extends AppCompatActivity {
                 });
         AlertDialog alert = builder.create();
         alert.show();
-
-
-
 
     }
 

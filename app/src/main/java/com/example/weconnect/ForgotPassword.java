@@ -54,8 +54,9 @@ public class ForgotPassword extends AppCompatActivity {
                     Toast.makeText(ForgotPassword.this, "Please Enter a valid email", Toast.LENGTH_SHORT).show();
                     emailAdd.setError("Valid email is required");
                     emailAdd.requestFocus();
-                }else{
-
+                }
+                else
+                {
                     firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
