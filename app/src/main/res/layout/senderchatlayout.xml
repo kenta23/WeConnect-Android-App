@@ -39,6 +39,13 @@
 
 
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/timeofmessage"
+            android:id="@+id/emojiicon"
+            android:visibility="gone"
+            ></ImageView>
 
 
 

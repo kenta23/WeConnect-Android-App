@@ -8,8 +8,6 @@
     style="@style/backgroundSettings"
     tools:context=".settings">
 
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,6 +18,7 @@
             android:src="@drawable/back_arrow"
             android:padding="14dp"
             style="@style/backgroundSettings"
+            android:id="@+id/backbuttonIcon"
             />
 
         <TextView
@@ -260,15 +259,11 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="Security and Privacy"
-            android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
 
             <LinearLayout
-
-
-
-                android:background="@drawable/round_back_secondary_100"
+                style="@style/backgroundLinearLayoutSettings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -404,14 +399,12 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:text="Appearance"
-                android:textColor="@color/black"
+
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
-
             <LinearLayout
-
-            android:background="@drawable/round_back_secondary_100"
+            style="@style/backgroundLinearLayoutSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -539,12 +532,50 @@
 
 
 
-        </LinearLayout>
+
+            </LinearLayout>
 
 
+            <LinearLayout
+                style="@style/backgroundLinearLayoutSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:id="@+id/signoutContainer"
+                android:layout_marginBottom="40dp"
+                android:clickable="true"
+                >
+
+                <!-- Theme Button -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                     >
 
 
+                    <ImageView
+                        android:id="@+id/signoutIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/themes" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_toEndOf="@+id/signoutIcon"
+                    android:text="Sign out"
+                    android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 

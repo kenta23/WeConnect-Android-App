@@ -110,11 +110,12 @@
         android:fontFamily="@font/roboto"
         android:text="@string/log_in"
         android:textSize="12sp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarPassword"
-        style="@style/textcolor"
+
         />
 
     <TextView

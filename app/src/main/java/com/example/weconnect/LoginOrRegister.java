@@ -128,7 +128,6 @@ public class LoginOrRegister extends AppCompatActivity {
 
                             //get the user's email auth
                             user = task.getResult().getUser();
-
                             if(user != null) {
                                 //if email is existed already in Firebase auth
                                 Toast.makeText(LoginOrRegister.this, "Login Successful", Toast.LENGTH_SHORT).show();
@@ -249,10 +248,10 @@ public class LoginOrRegister extends AppCompatActivity {
          GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
          String emailUser = signInAccount.getEmail();
 
-         startActivity(new Intent(LoginOrRegister.this, Profile.class));
+         startActivity(new Intent(LoginOrRegister.this, WelcomeUser.class));
 
          //FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-      /*   authProfile.fetchSignInMethodsForEmail(emailUser)
+      /*  authProfile.fetchSignInMethodsForEmail(emailUser)
                  .addOnCompleteListener(task -> {
                      if (task.isSuccessful()) {
                          SignInMethodQueryResult result = task.getResult();

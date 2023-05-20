@@ -2,13 +2,18 @@ package com.example.weconnect;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.pgreze.reactions.ReactionPopup;
+import com.github.pgreze.reactions.ReactionsConfig;
+import com.github.pgreze.reactions.ReactionsConfigBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 
 import android.content.Context;
@@ -57,11 +62,50 @@ public class MessagesAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         Messages messages=messagesArrayList.get(position);
+
+        int reactions[] = new int[] {
+                R.drawable.ic_fb_like,
+                R.drawable.ic_fb_love,
+                R.drawable.ic_fb_laugh,
+                R.drawable.ic_fb_wow,
+                R.drawable.ic_fb_sad,
+                R.drawable.ic_fb_angry
+        };
+
+        ReactionsConfig config = new ReactionsConfigBuilder(context)
+                .withReactions(reactions)
+                .build();
+
+        ReactionPopup popup = new ReactionPopup(context, config, (pos) -> {
+            if(holder.getClass() == SenderViewHolder.class) {
+                 SenderViewHolder viewHolder =  (SenderViewHolder)holder;
+                 viewHolder.emojiIcon.setImageResource(reactions[pos]);
+                 viewHolder.emojiIcon.setVisibility(View.VISIBLE);
+            }
+            else {
+                RecieverViewHolder viewHolder = (RecieverViewHolder)holder;
+                viewHolder.emojiIcon.setImageResource(reactions[pos]);
+                viewHolder.emojiIcon.setVisibility(View.VISIBLE);
+            }
+
+            return true; // true is closing popup, false is requesting a new selection
+        });
+
+
+
         if(holder.getClass()==SenderViewHolder.class)
         {
             SenderViewHolder viewHolder=(SenderViewHolder)holder;
             viewHolder.textViewmessaage.setText(messages.getMessage());
             viewHolder.timeofmessage.setText(messages.getCurrenttime());
+
+            viewHolder.textViewmessaage.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    popup.onTouch(v, event);
+                    return false;
+                }
+            });
         }
         else
         {
@@ -96,12 +140,14 @@ public class MessagesAdapter extends RecyclerView.Adapter {
 
         TextView textViewmessaage;
         TextView timeofmessage;
+        ImageView emojiIcon;
 
 
         public SenderViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewmessaage=itemView.findViewById(R.id.sendermessage);
             timeofmessage=itemView.findViewById(R.id.timeofmessage);
+            emojiIcon = itemView.findViewById(R.id.emojiicon);
         }
     }
 
@@ -110,12 +156,14 @@ public class MessagesAdapter extends RecyclerView.Adapter {
 
         TextView textViewmessaage;
         TextView timeofmessage;
+        ImageView emojiIcon;
 
 
         public RecieverViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewmessaage=itemView.findViewById(R.id.sendermessage);
             timeofmessage=itemView.findViewById(R.id.timeofmessage);
+            emojiIcon = itemView.findViewById(R.id.emojiicon);
         }
     }
 }

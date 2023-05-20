@@ -18,6 +18,8 @@
     <!--background color -->
     <style name="background">
         <item name="android:background">@color/dark</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
     </style>
 
     <!--text color -->
@@ -50,6 +52,17 @@
     </style>
 
     <style name="backgroundLinearLayoutSettings">
-        <item name="android:background">@drawable/round</item>
+        <item name="android:background">@drawable/round_back_secondary_dark</item>
+    </style>
+
+    <style name="backgroundCountryCodePicker" >
+        app:ccp_contentColor="@color/white"
+        app:ccpDialog_backgroundColor="@color/white"
+        app:ccpDialog_textColor="@color/white"
+        app:ccp_arrowColor="@color/white"
+    </style>
+
+    <style name="backgroundchatmain">
+        <item  name="android:background">@color/dark</item>
     </style>
 </resources>

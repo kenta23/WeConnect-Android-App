@@ -8,8 +8,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="50dp"
-        android:background="#fafaeb"
-        android:id="@+id/layoutformessage">
+        android:background="@drawable/receiverchatbackground"
+        android:id="@+id/layoutformessage"
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,6 +37,15 @@
             android:text="20:09"
             android:padding="7dp"
             android:textColor="#434343" />
+        
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/timeofmessage"
+            android:layout_toRightOf="@id/timeofmessage"
+            android:visibility="gone"
+            android:id="@+id/emojiicon"
+            ></ImageView>
 
 
     </RelativeLayout>

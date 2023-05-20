@@ -25,8 +25,11 @@
     <style name="Theme.WeConnect.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
+    <!--background color -->
     <style name="background">
         <item name="android:background">@drawable/background_light</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/black</item>
     </style>
 
     <!--text color -->
@@ -36,7 +39,8 @@
 
     <!--CHAT activity -->
     <style name="backgroundChat">
-        <item  name="android:background">@color/white</item>
+        <item name="android:background">@color/white</item>
+        <item   name="android:textColor">@color/black</item>
     </style>
 
     <style name="backgroundProfile">
@@ -44,7 +48,7 @@
             @color/white
         </item>
         <item name="android:textColor">@color/dark</item>
-        <item name="android:textColorHint">@color/dark</item>
+        <item name="android:textColorHint">@color/black</item>
     </style>
 
 
@@ -58,6 +62,18 @@
 
     <style name="backgroundLinearLayoutSettings">
         <item name="android:background">@drawable/round_back_secondary_100</item>
+    </style>
+
+
+    <style name="backgroundCountryCodePicker" >
+        app:ccp_contentColor="@color/white"
+        app:ccpDialog_backgroundColor="@color/white"
+        app:ccpDialog_textColor="@color/white"
+        app:ccp_arrowColor="@color/white"
+    </style>
+
+    <style name="backgroundchatmain">
+        <item  name="android:background">@color/white</item>
     </style>
 
 </resources>

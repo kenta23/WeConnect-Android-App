@@ -69,6 +69,7 @@ public class chatFragment extends Fragment {
                 else
                 {
                     noteViewHolder.statusofuser.setText(firebasemodel.getStatus());
+                    noteViewHolder.statusofuser.setTextColor(Color.GRAY);
                 }
 
                 noteViewHolder.itemView.setOnClickListener(new View.OnClickListener() {

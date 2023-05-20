@@ -45,6 +45,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/stay_connected_through_weconnect"
         android:textSize="17sp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />

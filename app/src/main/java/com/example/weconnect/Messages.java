@@ -7,7 +7,6 @@ public class Messages {
     long timestamp;
     String currenttime;
 
-
     public Messages() {
     }
 

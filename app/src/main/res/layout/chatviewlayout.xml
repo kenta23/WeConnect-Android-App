@@ -27,6 +27,7 @@
             android:textSize="20sp"
             android:id="@+id/nameofuser"
             android:textStyle="bold"
+            style="@style/textcolor"
             >
 
         </TextView>
@@ -42,7 +43,7 @@
             android:layout_toRightOf="@id/cardviewofuser"
             android:id="@+id/statusofuser"
             android:layout_below="@id/nameofuser"
-
+            style="@style/textcolor"
             >
 
         </TextView>
