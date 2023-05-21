@@ -109,15 +109,6 @@ public class Chat extends AppCompatActivity {
                 Intent intentSettings = new Intent(Chat.this, settings.class);
                 startActivity(intentSettings);
                 break;
-            case R.id.logoutProfile:
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(getApplicationContext(),"Signing out",Toast.LENGTH_SHORT).show();
-
-                Intent mainpageIntent = new Intent(Chat.this, LoginOrRegister.class);
-                mainpageIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(mainpageIntent);
-                finish();
-
         }
 
 

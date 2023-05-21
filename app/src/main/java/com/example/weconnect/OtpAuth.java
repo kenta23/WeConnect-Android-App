@@ -148,7 +148,7 @@ public class OtpAuth extends AppCompatActivity {
                             mprogressbarofotpauth.setVisibility(View.INVISIBLE);
                             Toast.makeText(getApplicationContext(),"Login success",Toast.LENGTH_SHORT).show();
 
-                            Intent intent=new Intent(OtpAuth.this,Chat.class);
+                            Intent intent=new Intent(OtpAuth.this, Chat.class);
                             startActivity(intent);
                             finish();
                         }

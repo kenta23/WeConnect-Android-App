@@ -72,23 +72,45 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        firebaseAuth=FirebaseAuth.getInstance();
-        firebaseStorage=FirebaseStorage.getInstance();
-        storageReference=firebaseStorage.getReference();
-        firebaseFirestore=FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
+        storageReference = firebaseStorage.getReference();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
 
-        mgetusername=findViewById(R.id.getusername);
-        mgetuserimage=findViewById(R.id.getuserimage);
-        mgetuserimageinimageview=findViewById(R.id.getuserimageinimageview);
-        msaveprofile=findViewById(R.id.saveProfile);
-        mprogressbarofsetprofile=findViewById(R.id.progressbarofsetProfile);
+        mgetusername = findViewById(R.id.getusername);
+        mgetuserimage = findViewById(R.id.getuserimage);
+        mgetuserimageinimageview = findViewById(R.id.getuserimageinimageview);
+        msaveprofile = findViewById(R.id.saveProfile);
+        mprogressbarofsetprofile = findViewById(R.id.progressbarofsetProfile);
 
         googleuser = GoogleSignIn.getLastSignedInAccount(this);
 
-        if(googleuser!=null) {
+
+        user = firebaseAuth.getCurrentUser();
+        if (googleuser != null) {
             mgetusername.setText(googleuser.getDisplayName());
+        } else
+        {
+        if (user != null) {
+            boolean isFacebookUser = user.getProviderData().stream()
+                    .anyMatch(provider -> provider.getProviderId().equals("facebook.com"));
+            boolean isPhoneUser = user.getProviderData().equals("Phone");
+
+            if (isFacebookUser) {
+                // User is logged in with Facebook
+                Intent intent = getIntent();
+                String name =  intent.getStringExtra("name");
+                mgetusername.setText(name);
+            } else {
+                // User is not logged in with Facebook
+            }
+        } else {
+            // User is not logged in
         }
+
+    }
+
 
         mgetuserimage.setOnClickListener(new View.OnClickListener() {
             @Override

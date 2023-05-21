@@ -68,19 +68,19 @@ public class WelcomeUser extends AppCompatActivity {
         authProfile = FirebaseAuth.getInstance();
         currentUser = authProfile.getCurrentUser();
 
-        //  GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-       //  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+          GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+          FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-       /* if (user != null) {
+        if (user != null) {
             String name = user.getDisplayName();
             welcomeText.setText("Welcome, " + name + "!");
-        } else {
+         } else {
             if (googleAccount != null) {
                 String username = googleAccount.getDisplayName();
                 welcomeText.setText("Welcome, " + username + "!");
             }
             //follows here
-        } */
+        }
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,10 +111,6 @@ public class WelcomeUser extends AppCompatActivity {
         });
 
         // Check if user is already logged in
-
-        if (currentUser != null) {
-            displayAccountName(currentUser);
-        }
 
     }
 

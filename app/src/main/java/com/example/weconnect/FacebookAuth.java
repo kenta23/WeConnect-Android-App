@@ -93,7 +93,7 @@ public class FacebookAuth extends LoginOrRegister {
                             } else {
                                 // This is an existing user, perform actions for an existing user
                                 // For example, you can redirect them to the main screen or load their data
-                                Intent intent = new Intent(FacebookAuth.this, Chat.class);
+                                Intent intent = new Intent(FacebookAuth.this, WelcomeUser.class);
                                 startActivity(intent);
                                 finish();
                             }

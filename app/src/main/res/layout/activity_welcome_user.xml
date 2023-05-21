@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".WelcomeUser"
     android:background="@drawable/bgemojis"
+    style="@style/textcolor"
     >
 
     <TextView
@@ -15,15 +16,16 @@
         android:layout_below="@+id/logo"
         android:layout_alignStart="@+id/logo"
         android:layout_alignEnd="@+id/logo"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="-26dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="-35dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="-47dp"
+        android:layout_marginEnd="-37dp"
         android:fontFamily="@font/roboto"
         android:text="Welcome user"
-        android:textColor="@color/dark"
         android:textSize="24sp"
-        android:textStyle="normal" />
+        android:textStyle="normal"
+        style="@style/textcolor"
+        />
 
     <ImageView
         android:id="@+id/logo"
@@ -41,7 +43,9 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/roboto"
-        android:text="Continue" />
+        android:text="Continue"
+        android:textColor="@color/white"
+        />
 
     <Button
         android:id="@+id/buttonLogout"
@@ -50,6 +54,8 @@
         android:layout_below="@+id/btnContinue"
         android:layout_centerInParent="true"
         android:backgroundTint="@color/design_default_color_error"
-        android:text="logout" />
+        android:text="logout"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>
