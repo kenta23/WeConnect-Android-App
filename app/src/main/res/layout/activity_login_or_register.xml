@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.201"
-        app:srcCompat="@drawable/user"
+        app:srcCompat="@drawable/logo_weconnect"
         tools:ignore="ImageContrastCheck" />
 
 
@@ -90,7 +90,7 @@
         android:id="@+id/txtForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="48dp"
         android:fontFamily="@font/roboto"
         android:text="@string/forgot_password"
         android:textColor="@color/white"
@@ -163,8 +163,9 @@
         android:fontFamily="@font/roboto"
         android:text="@string/register_now"
         android:textColor="@color/white"
-
-        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColorHighlight="@color/purple_200"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
@@ -223,6 +224,15 @@
             tools:ignore="ImageContrastCheck,InefficientWeight" />
 
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/showPasswordCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Password"
+        android:checked="false"
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintStart_toStartOf="@+id/password" />
 
     <EditText
         android:id="@+id/password"

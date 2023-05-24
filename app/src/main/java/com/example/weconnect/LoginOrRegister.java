@@ -9,11 +9,15 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,11 +81,25 @@ public class LoginOrRegister extends AppCompatActivity {
         register = findViewById(R.id.txtRegister);
         phoneOtp = findViewById(R.id.imgPhone);
         forgotPass = findViewById(R.id.txtForgotPassword);
-
-
         authProfile = FirebaseAuth.getInstance();
-        //Password Reset
+        EditText passwordEditText = findViewById(R.id.password);
+        CheckBox showPasswordCheckbox = findViewById(R.id.showPasswordCheckbox);
 
+        // Show password
+        showPasswordCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    passwordEditText.setTransformationMethod(null); // Show the password
+                } else {
+                    passwordEditText.setTransformationMethod(new PasswordTransformationMethod()); // Hide the password
+                }
+            }
+        });
+
+
+
+        //Password Reset
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -285,6 +303,8 @@ public class LoginOrRegister extends AppCompatActivity {
             finish();
         }
     }
+
+
 }
 
 
