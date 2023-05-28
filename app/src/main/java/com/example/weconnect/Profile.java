@@ -104,6 +104,7 @@ public class Profile extends AppCompatActivity {
                 mgetusername.setText(name);
             } else {
                 // User is not logged in with Facebook
+
             }
         } else {
             // User is not logged in
@@ -140,6 +141,7 @@ public class Profile extends AppCompatActivity {
                     sendDataForNewUser();
                     mprogressbarofsetprofile.setVisibility(View.INVISIBLE);
                     Intent intent=new Intent(Profile.this,WelcomeUser.class);
+                    intent.putExtra("username", name);
                     startActivity(intent);
                     finish();
 

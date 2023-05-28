@@ -275,6 +275,7 @@ public class ChatMain extends AppCompatActivity {
                     mgetmessage.setText(null);
 
 
+
                 }
 
 

@@ -22,6 +22,12 @@
         <item name="android:textColorHint">@color/white</item>
     </style>
 
+    <style name="backgroundRegister">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:background">@color/dark</item>
+    </style>
+
     <!--text color -->
     <style name="textcolor">
         <item name="android:textColor">@color/white</item>

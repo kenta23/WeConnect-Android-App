@@ -68,12 +68,17 @@ public class WelcomeUser extends AppCompatActivity {
         authProfile = FirebaseAuth.getInstance();
         currentUser = authProfile.getCurrentUser();
 
+
+        Intent intent = getIntent();
+        String userPhone = intent.getStringExtra("username");
+        welcomeText.setText("Welcome ");
+
           GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
           FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
             String name = user.getDisplayName();
-            welcomeText.setText("Welcome, " + name + "!");
+            welcomeText.setText("Welcome");
          } else {
             if (googleAccount != null) {
                 String username = googleAccount.getDisplayName();
@@ -132,7 +137,7 @@ public class WelcomeUser extends AppCompatActivity {
         }
 
         // Display the account name in your UI
-        welcomeText.setText("Welcome "+accountName);
+        welcomeText.setText("Welcome ");
     }
 
 

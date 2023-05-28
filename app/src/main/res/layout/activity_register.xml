@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/background"
+    style="@style/backgroundRegister"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,6 +41,7 @@
             android:layout_marginBottom="25dp"
             android:background="@drawable/button_bg"
             android:text="@string/sign_up"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/chkAgreement"
             app:layout_constraintHorizontal_bias="0.545"
@@ -236,6 +237,7 @@
             android:layout_marginBottom="15dp"
             android:onClick="openDatePicker"
             android:text="Button"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/radioGroup"
             app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress"
             app:layout_constraintHorizontal_bias="0.822"

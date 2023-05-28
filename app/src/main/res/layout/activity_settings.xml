@@ -110,6 +110,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:minHeight="48dp"
+                    android:visibility="gone"
                     android:onClick="onRelativeLayoutClicked">
 
 
@@ -183,6 +184,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:minHeight="48dp"
+                    android:visibility="gone"
                     android:onClick="onRelativeLayoutClicked"
                     tools:ignore="DuplicateIds">
 
@@ -220,6 +222,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:minHeight="48dp"
+                    android:visibility="gone"
                     android:onClick="onRelativeLayoutClicked"
                     tools:ignore="DuplicateIds">
 
@@ -260,7 +263,9 @@
             android:layout_marginTop="20dp"
             android:text="Security and Privacy"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"
+                />
 
             <LinearLayout
                 style="@style/backgroundLinearLayoutSettings"
@@ -270,6 +275,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
+                android:visibility="gone"
                 android:padding="15dp">
 
 
@@ -399,7 +405,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:text="Appearance"
-
+                android:visibility="gone"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -411,6 +417,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:orientation="vertical"
+                android:visibility="gone"
             android:padding="15dp">
 
 

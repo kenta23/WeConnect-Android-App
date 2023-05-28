@@ -14,13 +14,20 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 
 public class Chat extends AppCompatActivity {
@@ -62,6 +69,37 @@ public class Chat extends AppCompatActivity {
 
         pagerAdapter=new PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("chats");
+
+
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // Handle new data added
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    // Iterate over the newly added children
+                    String key = childSnapshot.getKey();
+                    // Use the key or childSnapshot to access the new data
+                    // Perform necessary operations
+
+                    if(key != null) {
+                        Notifications();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        };
+
+        databaseReference.addValueEventListener(valueEventListener);
+
+
+
+
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -125,6 +163,20 @@ public class Chat extends AppCompatActivity {
 
 
         return true;
+    }
+
+    public void Notifications() {
+        FirebaseMessaging.getInstance().subscribeToTopic("Message")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Done";
+                        if (!task.isSuccessful()) {
+                            msg = "Failed";
+                        }
+
+                    }
+                });
     }
 
     @Override
