@@ -178,12 +178,12 @@ public class Register extends AppCompatActivity {
         String hashedPassword = hashPassword(textPassword);
 
         // Create user profile
-        auth.createUserWithEmailAndPassword(textEmail, hashedPassword).addOnCompleteListener(Register.this, task -> {
+        auth.createUserWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(Register.this, task -> {
             if (task.isSuccessful()) {
                 FirebaseUser firebaseUser = auth.getCurrentUser();
 
                 // Enter data into Firebase
-                Users users = new Users(textFirstName, textLastName, textEmail, textBirthDate, textGender, hashedPassword);
+                Users users = new Users(textFirstName, textLastName, textEmail, textBirthDate, textGender);
 
                 // Extracting user for "Registered User" from database
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");

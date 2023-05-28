@@ -11,7 +11,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     public PagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
-        tabcount=behavior;
+        tabcount = behavior;
 
     }
 

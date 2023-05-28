@@ -1,19 +1,19 @@
 package com.example.weconnect;
 
 public class Users {
-    String firstName, lastName, email, birthdate, gender, Password;
+    String firstName, lastName, email, birthdate, gender;
 
     public Users() {
 
     }
 
-    public Users(String firstName, String lastName, String email, String birthdate, String gender, String password) {
+    public Users(String firstName, String lastName, String email, String birthdate, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.birthdate = birthdate;
         this.gender = gender;
-        this.Password = password;
+
     }
 
     public String getFirstName() {
@@ -56,13 +56,7 @@ public class Users {
         this.gender = gender;
     }
 
-    public String getPassword() {
-        return Password;
-    }
 
-    public void setPassword(String password) {
-        this.Password = password;
-    }
 
 
 }
