@@ -24,12 +24,12 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 return new chatFragment();
 
 
-            case 1:
+          /*  case 1:
                 return new statusFragment();
 
             case 2:
 
-                return new callsFragment();
+                return new callsFragment(); */
 
 
             default:

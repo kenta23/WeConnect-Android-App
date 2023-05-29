@@ -32,17 +32,16 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public class Chat extends AppCompatActivity {
 
+
     TabLayout tabLayout;
     TabItem mchat,mcall,mstatus;
+
     ViewPager viewPager;
     PagerAdapter pagerAdapter;
     androidx.appcompat.widget.Toolbar mtoolbar;
 
     FirebaseAuth firebaseAuth;
-
-
     FirebaseFirestore firebaseFirestore;
-
 
 
     @Override
@@ -51,9 +50,12 @@ public class Chat extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         tabLayout=findViewById(R.id.include);
+
+
+
         mchat=findViewById(R.id.chat);
-        mcall=findViewById(R.id.calls);
-        mstatus=findViewById(R.id.status);
+        //mcall=findViewById(R.id.calls);
+        //mstatus=findViewById(R.id.status);
         viewPager=findViewById(R.id.fragmentcontainer);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -110,7 +112,6 @@ public class Chat extends AppCompatActivity {
                 {
                     pagerAdapter.notifyDataSetChanged();
                 }
-
 
 
             }

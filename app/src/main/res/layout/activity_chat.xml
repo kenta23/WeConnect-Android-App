@@ -43,20 +43,21 @@
         android:layout_below="@id/toolbar"
         app:tabTextColor="#77a3a7"
         app:tabSelectedTextColor="@color/white"
-        app:tabIndicatorColor="@color/white"
         android:backgroundTint="@color/primary"
         app:tabIndicatorHeight="3dp"
         android:layout_marginTop="0dp"
         >
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Chats"
-            android:id="@+id/chat">
+            android:id="@+id/chat"
+            >
 
         </com.google.android.material.tabs.TabItem>
 
-        <com.google.android.material.tabs.TabItem
+      <!--  <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Status"
@@ -73,9 +74,7 @@
             android:visibility="invisible"
             android:id="@+id/calls">
 
-        </com.google.android.material.tabs.TabItem>
-
-
+        </com.google.android.material.tabs.TabItem> -->
 
     </com.google.android.material.tabs.TabLayout>
 
