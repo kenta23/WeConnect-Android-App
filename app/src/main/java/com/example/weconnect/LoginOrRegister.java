@@ -73,6 +73,9 @@ public class LoginOrRegister extends AppCompatActivity {
         EditText passwordEditText = findViewById(R.id.password);
         CheckBox showPasswordCheckbox = findViewById(R.id.showPasswordCheckbox);
 
+
+
+
         // Show password
         showPasswordCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

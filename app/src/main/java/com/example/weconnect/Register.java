@@ -6,8 +6,10 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -55,6 +58,8 @@ public class Register extends AppCompatActivity {
     private static final String TAG = "Register";
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
+    private TextView termsLink;
+
     DatabaseReference reference;
     FirebaseDatabase db;
 
@@ -89,6 +94,20 @@ public class Register extends AppCompatActivity {
         EditText passwordEditText = findViewById(R.id.editPassword);
         EditText confirmPasswordEditText = findViewById(R.id.editConfirmPassword);
         CheckBox showPasswordCheckbox = findViewById(R.id.showPasswordCheckbox);
+
+        //Link to Privacy Policy
+
+        termsLink = findViewById(R.id.termsLink);
+
+        termsLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(Register.this , PrivacyPolicy.class));
+            }
+        });
+
+
 
 
         // Show password check box
